@@ -1,4 +1,18 @@
 services:
+  agrimarket-db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${AGRI_POSTGRES_DB:-agrimarket}
+      - POSTGRES_USER=${AGRI_POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${AGRI_POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - agrimarket-pgdata:/var/lib/postgresql/data
+    ports:
+      - "${AGRI_DB_PORT:-5433}:5432"
+    networks:
+      - agrimarket-net
+
   agrimarket-api:
     build:
       context: .
@@ -15,6 +29,8 @@ services:
       - Jwt__Issuer=${AGRI_JWT_ISSUER:-AgriMarket}
       - Jwt__Audience=${AGRI_JWT_AUDIENCE:-AgriMarket}
       - Cors__Origins__0=${AGRI_CORS_ORIGIN:-http://localhost:8080}
+    depends_on:
+      - agrimarket-db
     networks:
       - agrimarket-net
 
@@ -30,9 +46,13 @@ services:
       - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
       - ConnectionStrings__DefaultConnection=Host=agrimarket-db;Port=5432;Database=${AGRI_POSTGRES_DB:-agrimarket};Username=${AGRI_POSTGRES_USER:-postgres};Password=${AGRI_POSTGRES_PASSWORD:-postgres}
+    depends_on:
+      - agrimarket-db
     networks:
       - agrimarket-net
 
+volumes:
+  agrimarket-pgdata:
+
 networks:
   agrimarket-net:
-    external: true

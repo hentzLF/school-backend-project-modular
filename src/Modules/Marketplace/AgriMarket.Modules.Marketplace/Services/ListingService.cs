@@ -6,6 +6,7 @@ using AgriMarket.Modules.Marketplace.Persistence;
 using AgriMarket.Modules.Users.Contracts;
 using AgriMarket.Shared.Exceptions;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace AgriMarket.Modules.Marketplace.Services;
@@ -20,7 +21,7 @@ internal sealed class ListingService(
     IAvailabilityRepository availabilityRepository,
     IRepository<Location> locations,
     IRepository<Municipality> municipalities,
-    IUnitOfWork uow,
+    [FromKeyedServices("marketplace")] IUnitOfWork uow,
     IUsersModule usersModule,
     IBookingsModule bookingsModule,
     ILogger<ListingService> logger) : IListingService

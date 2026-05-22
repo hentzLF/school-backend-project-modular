@@ -28,7 +28,7 @@ public sealed class UsersModule : IModule
             options.UseNpgsql(connectionString, npgsql =>
                 npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "users")));
 
-        services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+        services.AddKeyedScoped<IUnitOfWork, EfUnitOfWork>("users");
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         services.AddScoped<IAppUserRepository, EfAppUserRepository>();
         services.AddScoped<IRefreshTokenRepository, EfRefreshTokenRepository>();

@@ -2,13 +2,14 @@ using AgriMarket.Modules.Marketplace.Contracts;
 using AgriMarket.Modules.Marketplace.Entities;
 using AgriMarket.Shared.Exceptions;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Marketplace;
 
 internal sealed class CatalogModuleApi(
     IRepository<ServiceListing> listings,
     IRepository<Availability> availabilities,
-    IUnitOfWork uow) : ICatalogModule
+    [FromKeyedServices("marketplace")] IUnitOfWork uow) : ICatalogModule
 {
     public async Task<bool> TryReserveAvailabilityAsync(Guid availabilityId, CancellationToken ct = default)
     {

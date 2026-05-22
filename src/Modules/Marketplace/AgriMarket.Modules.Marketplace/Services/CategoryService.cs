@@ -1,6 +1,7 @@
 using AgriMarket.Modules.Marketplace.Entities;
 using AgriMarket.Modules.Marketplace.Persistence;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace AgriMarket.Modules.Marketplace.Services;
@@ -8,7 +9,7 @@ namespace AgriMarket.Modules.Marketplace.Services;
 internal sealed class CategoryService(
     IRepository<ServiceCategory> categories,
     IRepository<ServiceListing> listings,
-    IUnitOfWork uow,
+    [FromKeyedServices("marketplace")] IUnitOfWork uow,
     IQueryMaterializer mat,
     ILogger<CategoryService> logger) : ICategoryService
 {

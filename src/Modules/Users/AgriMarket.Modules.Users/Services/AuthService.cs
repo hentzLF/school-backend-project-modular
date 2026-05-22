@@ -5,6 +5,7 @@ using AgriMarket.Modules.Users.Persistence;
 using AgriMarket.Modules.Users.Security;
 using AgriMarket.Shared.Persistence;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace AgriMarket.Modules.Users.Services;
@@ -13,7 +14,7 @@ internal sealed class AuthService(
     IAppUserRepository appUsers,
     IRepository<UserRole> userRoles,
     IRefreshTokenRepository refreshTokens,
-    IUnitOfWork uow,
+    [FromKeyedServices("users")] IUnitOfWork uow,
     ITokenService tokenService,
     IPasswordHasher passwordHasher,
     IConfiguration config,

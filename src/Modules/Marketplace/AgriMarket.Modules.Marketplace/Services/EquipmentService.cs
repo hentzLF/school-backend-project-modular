@@ -3,6 +3,7 @@ using AgriMarket.Modules.Marketplace.Entities;
 using AgriMarket.Modules.Marketplace.Enums;
 using AgriMarket.Shared.Exceptions;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace AgriMarket.Modules.Marketplace.Services;
@@ -11,7 +12,7 @@ internal sealed class EquipmentService(
     IRepository<Equipment> equipments,
     IRepository<ServiceListing> listings,
     IRepository<ServiceListingEquipment> listingEquipments,
-    IUnitOfWork uow,
+    [FromKeyedServices("marketplace")] IUnitOfWork uow,
     IQueryMaterializer mat,
     ILogger<EquipmentService> logger) : IEquipmentService
 {

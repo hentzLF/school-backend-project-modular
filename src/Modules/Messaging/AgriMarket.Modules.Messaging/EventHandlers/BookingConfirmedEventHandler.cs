@@ -3,6 +3,7 @@ using AgriMarket.Modules.Messaging.Entities;
 using AgriMarket.Modules.Messaging.Persistence;
 using AgriMarket.Shared.Persistence;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Messaging.EventHandlers;
 
@@ -12,7 +13,7 @@ namespace AgriMarket.Modules.Messaging.EventHandlers;
 /// </summary>
 internal sealed class BookingConfirmedEventHandler(
     IRepository<Conversation> conversations,
-    IUnitOfWork uow) : INotificationHandler<BookingConfirmedEvent>
+    [FromKeyedServices("messaging")] IUnitOfWork uow) : INotificationHandler<BookingConfirmedEvent>
 {
     public async Task Handle(BookingConfirmedEvent notification, CancellationToken cancellationToken)
     {

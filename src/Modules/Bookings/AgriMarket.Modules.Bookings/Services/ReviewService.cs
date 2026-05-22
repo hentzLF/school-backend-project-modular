@@ -5,13 +5,14 @@ using AgriMarket.Modules.Bookings.Persistence;
 using AgriMarket.Modules.Marketplace.Contracts;
 using AgriMarket.Shared.Exceptions;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Bookings.Services;
 
 internal sealed class ReviewService(
     IRepository<Review> reviews,
     IBookingRepository bookings,
-    IUnitOfWork uow,
+    [FromKeyedServices("bookings")] IUnitOfWork uow,
     IQueryMaterializer mat,
     ICatalogModule catalog) : IReviewService
 {

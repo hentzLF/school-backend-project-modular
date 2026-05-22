@@ -7,6 +7,7 @@ using AgriMarket.Modules.Users.Contracts;
 using AgriMarket.Shared.Exceptions;
 using AgriMarket.Shared.Persistence;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using BookingConfirmedEvent = AgriMarket.Modules.Bookings.Contracts.BookingConfirmedEvent;
 
@@ -19,7 +20,7 @@ namespace AgriMarket.Modules.Bookings.Services;
 internal sealed class BookingService(
     IBookingRepository bookingRepo,
     IRepository<Payment> paymentRepo,
-    IUnitOfWork uow,
+    [FromKeyedServices("bookings")] IUnitOfWork uow,
     ICatalogModule catalog,
     IUsersModule users,
     IMediator mediator,

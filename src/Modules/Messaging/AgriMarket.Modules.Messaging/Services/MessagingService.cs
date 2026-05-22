@@ -6,6 +6,7 @@ using AgriMarket.Modules.Users.Contracts;
 using AgriMarket.Shared.Dtos;
 using AgriMarket.Shared.Exceptions;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Messaging.Services;
 
@@ -19,7 +20,7 @@ internal sealed class MessagingService(
     IRepository<Conversation> conversations,
     IRepository<Message> messages,
     IRepository<MessageRead> messageReads,
-    IUnitOfWork uow,
+    [FromKeyedServices("messaging")] IUnitOfWork uow,
     IUsersModule users,
     IMessageNotifier notifier) : IMessagingService
 {

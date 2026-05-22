@@ -2,13 +2,14 @@ using AgriMarket.Modules.Bookings.Entities;
 using AgriMarket.Modules.Bookings.Enums;
 using AgriMarket.Modules.Bookings.Persistence;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace AgriMarket.Modules.Bookings.Services;
 
 internal sealed class PaymentService(
     IPaymentRepository payments,
-    IUnitOfWork uow,
+    [FromKeyedServices("bookings")] IUnitOfWork uow,
     IQueryMaterializer mat,
     ILogger<PaymentService> logger) : IPaymentService
 {

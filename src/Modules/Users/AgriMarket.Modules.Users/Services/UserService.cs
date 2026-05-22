@@ -6,6 +6,7 @@ using AgriMarket.Modules.Users.Persistence;
 using AgriMarket.Modules.Bookings.Contracts;
 using AgriMarket.Shared.Persistence;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using UserProfileDto = AgriMarket.Modules.Users.Dtos.UserProfileDto;
 
@@ -15,7 +16,7 @@ internal sealed class UserService(
     IAppUserRepository appUsers,
     IUserProfileRepository userProfiles,
     IRepository<UserRole> userRoles,
-    IUnitOfWork uow,
+    [FromKeyedServices("users")] IUnitOfWork uow,
     IBookingsModule bookings,
     IMediator mediator,
     ILogger<UserService> logger) : IUserService
