@@ -129,19 +129,19 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 15. Messaging.Contracts project
 
-- [ ] 15.1 Create `AgriMarket.Modules.Messaging.Contracts` class library
-- [ ] 15.2 Define `IMessagingModule` interface and `IMessageNotifier`
-- [ ] 15.3 Define public DTO records
-- [ ] 15.4 Add to `AgriMarket.slnx`; verify build
-- [ ] 15.5 Git commit: `feat: add Messaging module contracts project`
+- [x] 15.1 Create `AgriMarket.Modules.Messaging.Contracts` class library
+- [x] 15.2 Define `IMessagingModule` interface (`GetUnreadConversationCountAsync`). `IMessageNotifier` deferred to Phase 6 with the SignalR hub
+- [~] 15.3 Public DTO records — deferred to Phase 6 (Messaging DTOs land with the deferred MessagingService)
+- [x] 15.4 Add to `AgriMarket.slnx`; verify build
+- [x] 15.5 Git commit: `feat: add Messaging module contracts project`
 
 ## 16. Messaging module core
 
-- [ ] 16.1 Create `AgriMarket.Modules.Messaging` class library referencing `AgriMarket.Shared`, its `.Contracts`, `Users.Contracts`, `Bookings.Contracts`
-- [ ] 16.2 Copy entities `Conversation`, `ConversationParticipant`, `Message`, `MessageRead` as `internal`; replace cross-module navs with `Guid` ids
-- [ ] 16.3 Create `MessagingDbContext` (`HasDefaultSchema("messaging")`) with relationship/index config
-- [ ] 16.4 Add `InternalsVisibleTo` for `AgriMarket.Tests`; verify build
-- [ ] 16.5 Git commit: `feat: add Messaging module entities and MessagingDbContext`
+- [x] 16.1 Create `AgriMarket.Modules.Messaging` class library referencing `AgriMarket.Shared` and its `.Contracts` (Users/Bookings `.Contracts` added in Phase 6 with the service)
+- [x] 16.2 Copy entities `Conversation`, `ConversationParticipant`, `Message`, `MessageRead` as `internal sealed`; removed 4 cross-module navs (Conversation→Booking, ConversationParticipant/Message/MessageRead→UserProfile)
+- [x] 16.3 Create `MessagingDbContext` (`HasDefaultSchema("messaging")`) with the in-module relationship/index config
+- [~] 16.4 `InternalsVisibleTo` for `AgriMarket.Tests` — deferred to block 22; build verified
+- [x] 16.5 Git commit: `feat: add Messaging module entities and MessagingDbContext`
 
 ## 17. Messaging repositories, services and hub
 

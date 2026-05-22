@@ -11,5 +11,7 @@
   <Project Path="src/Modules/Marketplace/AgriMarket.Modules.Marketplace/AgriMarket.Modules.Marketplace.csproj" />
   <Project Path="src/Modules/Bookings/AgriMarket.Modules.Bookings.Contracts/AgriMarket.Modules.Bookings.Contracts.csproj" />
   <Project Path="src/Modules/Bookings/AgriMarket.Modules.Bookings/AgriMarket.Modules.Bookings.csproj" />
+  <Project Path="src/Modules/Messaging/AgriMarket.Modules.Messaging.Contracts/AgriMarket.Modules.Messaging.Contracts.csproj" />
+  <Project Path="src/Modules/Messaging/AgriMarket.Modules.Messaging/AgriMarket.Modules.Messaging.csproj" />
   <Project Path="AgriMarket.Web/AgriMarket.Web.csproj" />
 </Solution>
