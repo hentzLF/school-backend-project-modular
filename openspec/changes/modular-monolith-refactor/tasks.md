@@ -145,19 +145,19 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 17. Messaging repositories, services and hub
 
-- [ ] 17.1 Move `EfConversationRepository` into the module as `internal`
-- [ ] 17.2 Move `MessagingService` (interface + DTOs) into the module
-- [ ] 17.3 Move SignalR `MessageHub` and `SignalRMessageNotifier` into the module
-- [ ] 17.4 Implement `IMessagingModule` and a `BookingConfirmedEvent` handler that creates a conversation
-- [ ] 17.5 Verify build
-- [ ] 17.6 Git commit: `feat: add Messaging module service, hub and integration handler`
+- [x] 17.1 Add the module persistence plumbing (`EfRepository<T>`/`EfUnitOfWork` bound to `MessagingDbContext`)
+- [~] 17.2 `MessagingService` — DEFERRED to Phase 6: it depends on `EfConversationRepository`, whose `ConversationSummaryDto`/`MessageDto` projections resolve participant/sender names from `UserProfile` (cross-module). Needs `IUsersModule` batch name resolution
+- [~] 17.3 `EfConversationRepository`, SignalR `MessageHub`, `SignalRMessageNotifier`, `IMessageNotifier` — DEFERRED to Phase 6
+- [~] 17.4 `IMessagingModule` adapter and the `BookingConfirmedEvent` handler — DEFERRED to Phase 6
+- [x] 17.5 Verify build
+- [x] 17.6 Git commit: `feat: add Messaging module persistence plumbing`
 
 ## 18. Messaging module registration
 
-- [ ] 18.1 Implement `MessagingModule : IModule` (maps controllers and the `/hubs/messages` hub)
-- [ ] 18.2 Move `ConversationsController` and `MessagesController` into the module
-- [ ] 18.3 Verify build
-- [ ] 18.4 Git commit: `feat: add Messaging module IModule registration and controllers`
+- [x] 18.1 Implement `MessagingModule : IModule` — wires `MessagingDbContext` (messaging-schema migrations history), repository plumbing, query materializer
+- [~] 18.2 Move `ConversationsController`/`MessagesController` and map the `/hubs/messages` hub — DEFERRED to Phase 6
+- [x] 18.3 Verify build
+- [x] 18.4 Git commit: `feat: add Messaging module IModule registration`
 
 ## Phase 6 — Composition and Switchover
 
