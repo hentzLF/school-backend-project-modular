@@ -6,7 +6,7 @@
 
 <h1>@Localizer["DeleteListing"]</h1>
 
-@if (ViewBag.HasActiveBookings == true)
+@if (Model.HasActiveBookings)
 {
     <div class="alert alert-danger">
         <strong>@Localizer["Warning"]</strong> @Localizer["CannotDeleteActiveBookings"]

@@ -102,7 +102,10 @@ public class LocationLookupServiceTests
         var munId = Guid.NewGuid();
         var municipality = new Municipality
         {
-            Id = munId, Name = "Tallinn", EhakCode = "0784", CountyId = HarjuId
+            Id = munId,
+            Name = "Tallinn",
+            EhakCode = "0784",
+            CountyId = HarjuId
         };
         _municipalities
             .Setup(r => r.FindAsync(It.IsAny<Expression<Func<Municipality, bool>>>(), It.IsAny<CancellationToken>()))

@@ -11,6 +11,7 @@ namespace AgriMarket.Web.Areas.Client.ViewModels.MyListings
         public decimal PricePerHectare { get; set; }
         public bool IsActive { get; set; }
         public int TotalBookingCount { get; set; }
+        public bool HasActiveBookings { get; set; }
         public List<EquipmentListItemViewModel> AssignedEquipment { get; set; } = [];
         public int AssignedEquipmentCount => AssignedEquipment.Count;
     }

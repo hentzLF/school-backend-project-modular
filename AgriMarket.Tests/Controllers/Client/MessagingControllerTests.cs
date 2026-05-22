@@ -63,7 +63,9 @@ public class MessagingControllerTests
             .ReturnsAsync(new PaginatedResponse<ConversationSummaryDto>
             {
                 Items = new List<ConversationSummaryDto>(),
-                TotalCount = 0, Page = 1, PageSize = 20
+                TotalCount = 0,
+                Page = 1,
+                PageSize = 20
             });
 
         var controller = CreateController(UserId);

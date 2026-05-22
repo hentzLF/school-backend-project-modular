@@ -152,8 +152,9 @@ public class MyListingsController(IListingService listingService, ICategoryServi
         var listing = await listingService.GetByIdAsync(id);
         if (listing == null || listing.UserProfileId != profile.Id) return NotFound();
 
-        ViewBag.HasActiveBookings = await bookingService.HasActiveBookingsAsync(id);
-        return View(listing.ToMyListingDetails(await bookingService.GetCountByListingAsync(id)));
+        var viewModel = listing.ToMyListingDetails(await bookingService.GetCountByListingAsync(id));
+        viewModel.HasActiveBookings = await bookingService.HasActiveBookingsAsync(id);
+        return View(viewModel);
     }
 
     [HttpPost, ActionName("Delete")]
@@ -172,8 +173,9 @@ public class MyListingsController(IListingService listingService, ICategoryServi
             TempData["ErrorMessage"] = ex.Message;
             var listing = await listingService.GetByIdAsync(id);
             if (listing == null) return NotFound();
-            ViewBag.HasActiveBookings = true;
-            return View("Delete", listing.ToMyListingDetails(await bookingService.GetCountByListingAsync(id)));
+            var deleteViewModel = listing.ToMyListingDetails(await bookingService.GetCountByListingAsync(id));
+            deleteViewModel.HasActiveBookings = true;
+            return View("Delete", deleteViewModel);
         }
         catch (KeyNotFoundException)
         {

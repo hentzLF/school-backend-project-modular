@@ -230,8 +230,11 @@ public class ReviewServiceTests
     {
         var review = new Review
         {
-            Id = Guid.NewGuid(), Rating = 5, CreatedAt = DateTime.UtcNow,
-            BookingId = BookingId, ReviewerProfileId = ReviewerProfileId,
+            Id = Guid.NewGuid(),
+            Rating = 5,
+            CreatedAt = DateTime.UtcNow,
+            BookingId = BookingId,
+            ReviewerProfileId = ReviewerProfileId,
             ReviewedProfileId = ReviewedProfileId
         };
         _reviews
@@ -310,9 +313,13 @@ public class ReviewServiceTests
             It.IsAny<CancellationToken>()))
             .ReturnsAsync(new Review
             {
-                Id = reviewId, Rating = 3, Comment = "Old",
-                BookingId = BookingId, ReviewerProfileId = ReviewerProfileId,
-                ReviewedProfileId = ReviewedProfileId, CreatedAt = DateTime.UtcNow
+                Id = reviewId,
+                Rating = 3,
+                Comment = "Old",
+                BookingId = BookingId,
+                ReviewerProfileId = ReviewerProfileId,
+                ReviewedProfileId = ReviewedProfileId,
+                CreatedAt = DateTime.UtcNow
             });
 
         var result = await _sut.UpdateAsync(ReviewerProfileId, new UpdateReviewDto { Id = reviewId, Rating = 5, Comment = "Updated" });
@@ -343,8 +350,12 @@ public class ReviewServiceTests
             It.IsAny<CancellationToken>()))
             .ReturnsAsync(new Review
             {
-                Id = reviewId, Rating = 3, ReviewerProfileId = Guid.NewGuid(),
-                BookingId = BookingId, ReviewedProfileId = ReviewedProfileId, CreatedAt = DateTime.UtcNow
+                Id = reviewId,
+                Rating = 3,
+                ReviewerProfileId = Guid.NewGuid(),
+                BookingId = BookingId,
+                ReviewedProfileId = ReviewedProfileId,
+                CreatedAt = DateTime.UtcNow
             });
 
         var ex = await Assert.ThrowsAsync<BusinessRuleException>(
@@ -359,8 +370,12 @@ public class ReviewServiceTests
         var reviewId = Guid.NewGuid();
         var review = new Review
         {
-            Id = reviewId, Rating = 3, ReviewerProfileId = ReviewerProfileId,
-            BookingId = BookingId, ReviewedProfileId = ReviewedProfileId, CreatedAt = DateTime.UtcNow
+            Id = reviewId,
+            Rating = 3,
+            ReviewerProfileId = ReviewerProfileId,
+            BookingId = BookingId,
+            ReviewedProfileId = ReviewedProfileId,
+            CreatedAt = DateTime.UtcNow
         };
         _reviews.Setup(r => r.FirstOrDefaultAsync(
             It.IsAny<Expression<Func<Review, bool>>>(),
@@ -394,8 +409,12 @@ public class ReviewServiceTests
             It.IsAny<CancellationToken>()))
             .ReturnsAsync(new Review
             {
-                Id = reviewId, Rating = 3, ReviewerProfileId = Guid.NewGuid(),
-                BookingId = BookingId, ReviewedProfileId = ReviewedProfileId, CreatedAt = DateTime.UtcNow
+                Id = reviewId,
+                Rating = 3,
+                ReviewerProfileId = Guid.NewGuid(),
+                BookingId = BookingId,
+                ReviewedProfileId = ReviewedProfileId,
+                CreatedAt = DateTime.UtcNow
             });
 
         var ex = await Assert.ThrowsAsync<BusinessRuleException>(
