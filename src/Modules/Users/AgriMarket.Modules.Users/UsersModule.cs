@@ -35,6 +35,7 @@ public sealed class UsersModule : IModule
         services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IUsersModule, UsersModuleApi>();
     }
 

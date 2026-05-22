@@ -3,10 +3,12 @@
   <ItemGroup>
     <ProjectReference Include="../../../Shared/AgriMarket.Shared/AgriMarket.Shared.csproj" />
     <ProjectReference Include="../AgriMarket.Modules.Users.Contracts/AgriMarket.Modules.Users.Contracts.csproj" />
+    <ProjectReference Include="../../Bookings/AgriMarket.Modules.Bookings.Contracts/AgriMarket.Modules.Bookings.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.8" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
