@@ -1,15 +1,19 @@
 # Project Status
 
 ## Current Phase
-Phase 1 (starting): Modular monolith refactoring — creating OpenSpec change.
+Phase 2 (starting): Users module.
 
 ## Completed
 - [x] Phase 0: AI workflow setup (agents, rules, skills, settings, devcontainer)
 - [x] Baseline verified: solution builds clean (0 errors, 17 warnings)
 - [x] Cleared root-owned bin/obj artifacts (fixed MSB3374 permission errors)
+- [x] OpenSpec change `modular-monolith-refactor` created (25 task blocks, 7 phases)
+- [x] Phase 1: Shared infrastructure — `AgriMarket.Shared` (IModule, EntityBase,
+      IRepository/IUnitOfWork, IntegrationEvent); src/ layout; build green
+  - Block 1: src/ layout + AgriMarket.Shared scaffolding
+  - Block 2: Shared abstractions (IModule, IEntity, IRepository, IUnitOfWork, IntegrationEvent)
 
 ## In Progress
-- [ ] Phase 1: Shared infrastructure (IModule, base classes, AgriMarket.Shared)
 - [ ] Phase 2: Users module
 - [ ] Phase 3: Marketplace module
 - [ ] Phase 4: Bookings module
