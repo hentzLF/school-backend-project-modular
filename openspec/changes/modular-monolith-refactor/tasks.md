@@ -87,10 +87,10 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 10. Marketplace module registration
 
-- [ ] 10.1 Implement `MarketplaceModule : IModule`
-- [ ] 10.2 Move `ListingsController`, `CategoriesController`, `CountiesController`, `ProviderEquipmentController`, `AdminCategoriesController`, `AdminListingsController` into the module
-- [ ] 10.3 Verify build
-- [ ] 10.4 Git commit: `feat: add Marketplace module IModule registration and controllers`
+- [x] 10.1 Implement `MarketplaceModule : IModule` — wires `MarketplaceDbContext` (marketplace-schema migrations history), repositories, query materializer, services, `ICatalogModule`
+- [~] 10.2 Move Marketplace controllers — DEFERRED to Phase 6 (bootstrapper MVC application-part wiring; `ListingsController`/`AdminListingsController` also block on the deferred `ListingService`)
+- [x] 10.3 Verify build
+- [x] 10.4 Git commit: `feat: add Marketplace module IModule registration`
 
 ## Phase 4 — Bookings Module
 
