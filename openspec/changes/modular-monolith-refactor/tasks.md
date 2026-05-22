@@ -8,20 +8,20 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 1. Create src/ layout and AgriMarket.Shared project
 
-- [ ] 1.1 Create directories `src/Shared`, `src/Modules/{Users,Marketplace,Bookings,Messaging}`, `src/Bootstrapper`
-- [ ] 1.2 Create `AgriMarket.Shared` class library at `src/Shared/AgriMarket.Shared` with package refs: `MediatR`, `Microsoft.EntityFrameworkCore`, `Microsoft.Extensions.DependencyInjection.Abstractions`, `Microsoft.AspNetCore.App` framework reference
-- [ ] 1.3 Add `AgriMarket.Shared` to `AgriMarket.slnx`
-- [ ] 1.4 Verify `dotnet build` succeeds (0 errors)
-- [ ] 1.5 Git commit: `chore: scaffold src/ layout and AgriMarket.Shared project`
+- [x] 1.1 Create directories `src/Shared`, `src/Modules/{Users,Marketplace,Bookings,Messaging}`, `src/Bootstrapper`
+- [x] 1.2 Create `AgriMarket.Shared` class library at `src/Shared/AgriMarket.Shared` with package refs: `MediatR`, `Microsoft.EntityFrameworkCore`, `Microsoft.Extensions.DependencyInjection.Abstractions`, `Microsoft.AspNetCore.App` framework reference
+- [x] 1.3 Add `AgriMarket.Shared` to `AgriMarket.slnx`
+- [x] 1.4 Verify `dotnet build` succeeds (0 errors)
+- [x] 1.5 Git commit: `chore: scaffold src/ layout and AgriMarket.Shared project`
 
 ## 2. Define shared abstractions
 
-- [ ] 2.1 Define `IModule` interface (`RegisterServices(IServiceCollection, IConfiguration)`, `MapEndpoints(IEndpointRouteBuilder)`) in `AgriMarket.Shared`
-- [ ] 2.2 Define base entity abstraction (`IEntity` / `EntityBase` with `Guid Id`)
-- [ ] 2.3 Define generic `IRepository<T>` and `IUnitOfWork` abstractions
-- [ ] 2.4 Define MediatR integration-event base type (`IntegrationEvent` record implementing `INotification`)
-- [ ] 2.5 Verify `dotnet build` succeeds
-- [ ] 2.6 Git commit: `feat: add IModule, base entity, repository and integration-event abstractions`
+- [x] 2.1 Define `IModule` interface (`RegisterServices(IServiceCollection, IConfiguration)`, `MapEndpoints(IEndpointRouteBuilder)`) in `AgriMarket.Shared`
+- [x] 2.2 Define base entity abstraction (`IEntity` / `EntityBase` with `Guid Id`)
+- [x] 2.3 Define generic `IRepository<T>` and `IUnitOfWork` abstractions
+- [x] 2.4 Define MediatR integration-event base type (`IntegrationEvent` record implementing `INotification`)
+- [x] 2.5 Verify `dotnet build` succeeds
+- [x] 2.6 Git commit: `feat: add IModule, base entity, repository and integration-event abstractions`
 
 ## Phase 2 — Users Module
 
