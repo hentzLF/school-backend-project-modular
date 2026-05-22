@@ -100,6 +100,13 @@ internal sealed class EfConversationRepository(MessagingDbContext db) : IConvers
         => await db.ConversationParticipants
             .AnyAsync(cp => cp.ConversationId == conversationId && cp.UserProfileId == profileId, ct);
 
+    public async Task<List<Guid>> GetConversationIdsAsync(Guid profileId, CancellationToken ct = default)
+        => await db.ConversationParticipants
+            .AsNoTracking()
+            .Where(cp => cp.UserProfileId == profileId)
+            .Select(cp => cp.ConversationId)
+            .ToListAsync(ct);
+
     public async Task<List<Guid>> GetUnreadMessageIdsAsync(
         Guid conversationId, Guid profileId, CancellationToken ct = default)
         => await db.Messages

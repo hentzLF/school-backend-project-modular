@@ -1,4 +1,5 @@
 using AgriMarket.Modules.Messaging.Dtos;
+using AgriMarket.Shared.Dtos;
 
 namespace AgriMarket.Modules.Messaging.Services;
 

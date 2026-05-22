@@ -3,6 +3,7 @@ using AgriMarket.Modules.Messaging.Dtos;
 using AgriMarket.Modules.Messaging.Entities;
 using AgriMarket.Modules.Messaging.Persistence;
 using AgriMarket.Modules.Users.Contracts;
+using AgriMarket.Shared.Dtos;
 using AgriMarket.Shared.Exceptions;
 using AgriMarket.Shared.Persistence;
 

@@ -1,3 +1,5 @@
+using AgriMarket.Shared.Dtos;
+
 namespace AgriMarket.Modules.Messaging.Dtos;
 
 internal sealed class ConversationDto
