@@ -27,5 +27,6 @@
     <InternalsVisibleTo Include="AgriMarket.Api" />
     <InternalsVisibleTo Include="AgriMarket.Tests" />
     <InternalsVisibleTo Include="AgriMarket.Web" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 </Project>
