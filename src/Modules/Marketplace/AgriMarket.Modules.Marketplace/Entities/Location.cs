@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Entities;
 
-internal sealed class Location
+public sealed class Location
 {
     public Guid Id { get; set; }
 

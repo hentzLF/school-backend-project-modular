@@ -2,7 +2,7 @@ using AgriMarket.Modules.Users.Enums;
 
 namespace AgriMarket.Modules.Users.Entities;
 
-internal sealed class UserRole
+public sealed class UserRole
 {
     public Guid Id { get; set; }
 

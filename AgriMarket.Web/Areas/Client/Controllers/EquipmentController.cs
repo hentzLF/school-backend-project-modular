@@ -1,6 +1,7 @@
-using AgriMarket.BLL;
-using AgriMarket.BLL.Services;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Shared.Exceptions;
+using AgriMarket.Modules.Users.Services;
+using AgriMarket.Modules.Marketplace.Services;
+using AgriMarket.Modules.Marketplace.Enums;
 using AgriMarket.Web.Areas.Client.ViewModels.Equipment;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;

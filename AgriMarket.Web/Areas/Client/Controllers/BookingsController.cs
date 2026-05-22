@@ -1,7 +1,8 @@
-using AgriMarket.BLL;
-using AgriMarket.BLL.Dtos.Payments;
-using AgriMarket.BLL.Services;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Shared.Exceptions;
+using AgriMarket.Modules.Bookings.Dtos.Payments;
+using AgriMarket.Modules.Bookings.Services;
+using AgriMarket.Modules.Users.Services;
+using AgriMarket.Modules.Bookings.Enums;
 using AgriMarket.Web.Areas.Client.ViewModels.Bookings;
 using AgriMarket.Web.Areas.Client.ViewModels.Payments;
 using AgriMarket.Web.Mappers;
@@ -100,7 +101,7 @@ public class BookingsController(
         }
     }
 
-    private static CheckoutViewModel BuildCheckoutViewModel(BLL.Dtos.Bookings.BookingDto booking)
+    private static CheckoutViewModel BuildCheckoutViewModel(AgriMarket.Modules.Bookings.Dtos.Bookings.BookingDto booking)
     {
         var platformFee = booking.TotalPrice * 0.05m;
         return new CheckoutViewModel
@@ -160,7 +161,7 @@ public class BookingsController(
         return RedirectToAction(nameof(Details), new { id });
     }
 
-    private async Task<AgriMarket.BLL.Dtos.Users.UserProfileDto?> GetClientProfileAsync()
+    private async Task<AgriMarket.Modules.Users.Dtos.UserProfileDto?> GetClientProfileAsync()
     {
         var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!Guid.TryParse(userIdStr, out var userId)) return null;

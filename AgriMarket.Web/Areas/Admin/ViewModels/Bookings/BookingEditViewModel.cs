@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Modules.Bookings.Enums;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;

@@ -23,5 +23,6 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="AgriMarket.Tests" />
+    <InternalsVisibleTo Include="AgriMarket.Web" />
   </ItemGroup>
 </Project>

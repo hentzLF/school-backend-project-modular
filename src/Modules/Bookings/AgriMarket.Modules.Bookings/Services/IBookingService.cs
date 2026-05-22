@@ -3,7 +3,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Modules.Bookings.Services;
 
-internal interface IBookingService
+public interface IBookingService
 {
     Task<IEnumerable<BookingDto>> GetAllAsync(BookingStatus? status = null, CancellationToken ct = default);
     Task<BookingDto?> GetByIdAsync(Guid id, CancellationToken ct = default);

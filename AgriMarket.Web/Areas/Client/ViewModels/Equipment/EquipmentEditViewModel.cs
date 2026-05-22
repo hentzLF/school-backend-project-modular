@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Modules.Marketplace.Enums;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Equipment;
 

@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Dtos.Reviews;
 
 namespace AgriMarket.Modules.Bookings.Services;
 
-internal interface IReviewService
+public interface IReviewService
 {
     Task<ReviewDto?> GetByBookingAsync(Guid bookingId, CancellationToken ct = default);
 

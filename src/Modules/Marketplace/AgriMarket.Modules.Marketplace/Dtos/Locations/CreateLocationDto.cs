@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Locations;
 
-internal sealed class CreateLocationDto : IValidatableObject
+public sealed class CreateLocationDto : IValidatableObject
 {
     [Required]
     public Guid MunicipalityId { get; init; }

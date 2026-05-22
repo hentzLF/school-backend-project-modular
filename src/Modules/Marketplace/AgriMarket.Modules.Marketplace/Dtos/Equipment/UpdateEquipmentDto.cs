@@ -3,7 +3,7 @@ using AgriMarket.Modules.Marketplace.Enums;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Equipment;
 
-internal sealed class UpdateEquipmentDto
+public sealed class UpdateEquipmentDto
 {
     [Required]
     [MaxLength(200)]

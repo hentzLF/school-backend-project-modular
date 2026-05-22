@@ -1,4 +1,4 @@
-using AgriMarket.BLL.Dtos.Reviews;
+using AgriMarket.Modules.Bookings.Dtos.Reviews;
 using AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 
 namespace AgriMarket.Web.Mappers;

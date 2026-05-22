@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Entities;
 
-internal sealed class ServiceCategory
+public sealed class ServiceCategory
 {
     public Guid Id { get; set; }
 

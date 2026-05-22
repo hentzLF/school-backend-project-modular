@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Bookings.Enums;
 
-internal enum PaymentResolution
+public enum PaymentResolution
 {
     Release = 1,
     Refund = 2

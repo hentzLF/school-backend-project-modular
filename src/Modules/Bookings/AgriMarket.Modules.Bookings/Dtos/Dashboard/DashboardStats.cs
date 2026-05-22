@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Modules.Bookings.Dtos.Dashboard;
 
-internal sealed class DashboardStats
+public sealed class DashboardStats
 {
     public int TotalUsers { get; set; }
     public int NewUsersThisMonth { get; set; }
@@ -20,7 +20,7 @@ internal sealed class DashboardStats
     public List<RecentBookingDto>? RecentBookings { get; set; }
 }
 
-internal sealed class RecentBookingDto
+public sealed class RecentBookingDto
 {
     public Guid Id { get; set; }
     public int Status { get; set; }
@@ -31,13 +31,13 @@ internal sealed class RecentBookingDto
     public ServiceListingDto? ServiceListing { get; set; }
 }
 
-internal sealed class ClientProfileDto
+public sealed class ClientProfileDto
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
 }
 
-internal sealed class ServiceListingDto
+public sealed class ServiceListingDto
 {
     public string Title { get; set; } = string.Empty;
 }

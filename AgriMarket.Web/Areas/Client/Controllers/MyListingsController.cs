@@ -1,7 +1,9 @@
-using AgriMarket.BLL;
-using AgriMarket.BLL.Dtos.Listings;
-using AgriMarket.BLL.Services;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Shared.Exceptions;
+using AgriMarket.Modules.Users.Services;
+using AgriMarket.Modules.Marketplace.Dtos.Listings;
+using AgriMarket.Modules.Marketplace.Services;
+using AgriMarket.Modules.Bookings.Services;
+using AgriMarket.Modules.Bookings.Enums;
 using AgriMarket.Web.Areas.Client.ViewModels.MyListings;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;
@@ -20,7 +22,7 @@ public class MyListingsController(IListingService listingService, ICategoryServi
         return Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out userId);
     }
 
-    private async Task<AgriMarket.BLL.Dtos.Users.UserProfileDto?> GetProviderProfileAsync()
+    private async Task<AgriMarket.Modules.Users.Dtos.UserProfileDto?> GetProviderProfileAsync()
     {
         if (!TryGetUserId(out var userId)) return null;
         return await userService.GetProfileByUserIdAsync(userId);

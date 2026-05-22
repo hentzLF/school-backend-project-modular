@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Entities;
 
-internal sealed class Municipality
+public sealed class Municipality
 {
     public Guid Id { get; set; }
 

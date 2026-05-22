@@ -3,7 +3,7 @@ using AgriMarket.Modules.Marketplace.Enums;
 
 namespace AgriMarket.Modules.Marketplace.Services;
 
-internal interface IEquipmentService
+public interface IEquipmentService
 {
     Task<IReadOnlyList<EquipmentDto>> GetByProviderAsync(Guid profileId, CancellationToken ct = default);
     Task<EquipmentDto?> GetByIdAsync(Guid profileId, Guid equipmentId, CancellationToken ct = default);

@@ -47,17 +47,17 @@
                         <label class="form-label fw-bold">@Localizer["Checkout_SelectPaymentMethod"]</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="Method" id="methodCard"
-                                   value="@((int)AgriMarket.Domain.Enums.PaymentMethod.Card)" checked />
+                                   value="@((int)AgriMarket.Modules.Bookings.Enums.PaymentMethod.Card)" checked />
                             <label class="form-check-label" for="methodCard">@Localizer["Checkout_PaymentMethod_Card"]</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="Method" id="methodBank"
-                                   value="@((int)AgriMarket.Domain.Enums.PaymentMethod.BankTransfer)" />
+                                   value="@((int)AgriMarket.Modules.Bookings.Enums.PaymentMethod.BankTransfer)" />
                             <label class="form-check-label" for="methodBank">@Localizer["Checkout_PaymentMethod_BankTransfer"]</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="Method" id="methodCash"
-                                   value="@((int)AgriMarket.Domain.Enums.PaymentMethod.Cash)" />
+                                   value="@((int)AgriMarket.Modules.Bookings.Enums.PaymentMethod.Cash)" />
                             <label class="form-check-label" for="methodCash">@Localizer["Checkout_PaymentMethod_Cash"]</label>
                         </div>
                     </div>

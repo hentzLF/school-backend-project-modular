@@ -1,6 +1,7 @@
-using AgriMarket.BLL.Contracts;
-using AgriMarket.BLL.Services;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Modules.Messaging.Contracts;
+using AgriMarket.Modules.Users.Security;
+using AgriMarket.Modules.Users.Services;
+using AgriMarket.Modules.Users.Enums;
 using AgriMarket.Web.Areas.Client.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -72,7 +73,7 @@ public class AccountController(IUserService userService, IPasswordHasher passwor
             return View(model);
         }
 
-        var user = new AgriMarket.Domain.Entities.AppUser
+        var user = new AgriMarket.Modules.Users.Entities.AppUser
         {
             Id = Guid.NewGuid(),
             Email = model.Email,
@@ -80,7 +81,7 @@ public class AccountController(IUserService userService, IPasswordHasher passwor
             CreatedAt = DateTime.UtcNow
         };
 
-        var profile = new AgriMarket.Domain.Entities.UserProfile
+        var profile = new AgriMarket.Modules.Users.Entities.UserProfile
         {
             Id = Guid.NewGuid(),
             FirstName = model.FirstName,
@@ -105,8 +106,8 @@ public class AccountController(IUserService userService, IPasswordHasher passwor
     public IActionResult AccessDenied() => View();
 
     private async Task SignInAsync(
-        AgriMarket.Domain.Entities.AppUser user,
-        AgriMarket.Domain.Entities.UserProfile profile,
+        AgriMarket.Modules.Users.Entities.AppUser user,
+        AgriMarket.Modules.Users.Entities.UserProfile profile,
         IEnumerable<RoleType> roles)
     {
         var claims = new List<Claim>

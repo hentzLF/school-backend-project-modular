@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Dtos.Payments;
 
 namespace AgriMarket.Modules.Bookings.Services;
 
-internal interface IClientPaymentService
+public interface IClientPaymentService
 {
     /// <param name="callerProfileId">UserProfile id of the paying client.</param>
     Task<PaymentReceiptDto> PayAsync(Guid callerProfileId, PayRequest request, CancellationToken ct = default);

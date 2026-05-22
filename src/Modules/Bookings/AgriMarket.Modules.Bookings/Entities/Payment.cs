@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Modules.Bookings.Entities;
 
-internal sealed class Payment
+public sealed class Payment
 {
     public Guid Id { get; set; }
 

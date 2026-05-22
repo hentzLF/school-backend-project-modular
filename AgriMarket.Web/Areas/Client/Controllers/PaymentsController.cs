@@ -1,4 +1,5 @@
-using AgriMarket.BLL.Services;
+using AgriMarket.Modules.Bookings.Services;
+using AgriMarket.Modules.Users.Services;
 using AgriMarket.Web.Areas.Client.ViewModels.Payments;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;
@@ -44,7 +45,7 @@ public class PaymentsController(
         return View(vm);
     }
 
-    private static ReceiptViewModel MapToReceiptViewModel(Domain.Entities.Payment payment)
+    private static ReceiptViewModel MapToReceiptViewModel(AgriMarket.Modules.Bookings.Entities.Payment payment)
     {
         return new ReceiptViewModel
         {
@@ -65,7 +66,7 @@ public class PaymentsController(
         return history.Any(h => h.BookingId == bookingId);
     }
 
-    private async Task<AgriMarket.BLL.Dtos.Users.UserProfileDto?> GetClientProfileAsync()
+    private async Task<AgriMarket.Modules.Users.Dtos.UserProfileDto?> GetClientProfileAsync()
     {
         var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!Guid.TryParse(userIdStr, out var userId)) return null;

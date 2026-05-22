@@ -2,7 +2,7 @@ using AgriMarket.Modules.Marketplace.Entities;
 
 namespace AgriMarket.Modules.Marketplace.Services;
 
-internal interface ICategoryService
+public interface ICategoryService
 {
     Task<IEnumerable<ServiceCategory>> GetAllAsync();
     Task<ServiceCategory?> GetByIdAsync(Guid id);

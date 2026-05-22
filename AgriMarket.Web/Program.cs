@@ -1,23 +1,33 @@
-using AgriMarket.BLL;
-using AgriMarket.DAL;
-using AgriMarket.DAL.Seeding;
+using AgriMarket.Modules.Bookings;
+using AgriMarket.Modules.Marketplace;
+using AgriMarket.Modules.Messaging;
+using AgriMarket.Modules.Messaging.Contracts;
+using AgriMarket.Modules.Users;
 using AgriMarket.Resources;
+using AgriMarket.Shared.Modules;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+IModule[] modules =
+[
+    new UsersModule(),
+    new MarketplaceModule(),
+    new BookingsModule(),
+    new MessagingModule(),
+];
+
+foreach (var module in modules)
+    module.RegisterServices(builder.Services, builder.Configuration);
+
 builder.Services.AddControllersWithViews()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 builder.Services.AddLocalization();
-builder.Services.AddDal();
-builder.Services.AddBll();
-builder.Services.AddScoped<AgriMarket.BLL.Contracts.IMessageNotifier, AgriMarket.Web.Services.NoOpMessageNotifier>();
+builder.Services.AddScoped<IMessageNotifier, AgriMarket.Web.Services.NoOpMessageNotifier>();
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
@@ -28,12 +38,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 });
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("DefaultConnection is missing from configuration.");
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
-
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -41,7 +45,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Client/Account/AccessDenied";
         options.Cookie.HttpOnly = true;
         options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-        options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+        options.Events = new CookieAuthenticationEvents
         {
             OnRedirectToLogin = ctx =>
             {
@@ -75,17 +79,13 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await context.Database.MigrateAsync();
-    var passwordHasher = scope.ServiceProvider.GetRequiredService<AgriMarket.BLL.Contracts.IPasswordHasher>();
-    await AppDbSeeder.SeedAsync(context, passwordHasher);
+    foreach (var module in modules)
+        await module.InitializeDatabaseAsync(scope.ServiceProvider);
 }
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -113,6 +113,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

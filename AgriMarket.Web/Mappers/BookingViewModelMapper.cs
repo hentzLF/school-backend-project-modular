@@ -1,4 +1,4 @@
-using AgriMarket.BLL.Dtos.Bookings;
+using AgriMarket.Modules.Bookings.Dtos.Bookings;
 using AgriMarket.Web.Areas.Admin.ViewModels;
 using AgriMarket.Web.Areas.Client.ViewModels.Bookings;
 using AgriMarket.Web.Areas.Client.ViewModels.MyListings;

@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Users.Entities;
 
-internal sealed class RefreshToken
+public sealed class RefreshToken
 {
     public Guid Id { get; set; }
 

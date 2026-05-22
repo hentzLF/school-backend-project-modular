@@ -1,5 +1,6 @@
-using AgriMarket.BLL.Dtos.Messaging;
-using AgriMarket.BLL.Services;
+using AgriMarket.Modules.Messaging.Dtos;
+using AgriMarket.Modules.Users.Services;
+using AgriMarket.Modules.Messaging.Services;
 using AgriMarket.Web.Areas.Client.ViewModels.Messaging;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;

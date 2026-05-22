@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Modules.Users.Dtos.Auth;
 
-internal sealed class LoginRequest
+public sealed class LoginRequest
 {
     [Required]
     [EmailAddress]

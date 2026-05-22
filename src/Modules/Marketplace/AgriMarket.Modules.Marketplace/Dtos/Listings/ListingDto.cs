@@ -2,7 +2,7 @@ using AgriMarket.Modules.Marketplace.Dtos.Locations;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Listings;
 
-internal sealed class ListingDto
+public sealed class ListingDto
 {
     public Guid Id { get; init; }
     public string Title { get; init; } = default!;

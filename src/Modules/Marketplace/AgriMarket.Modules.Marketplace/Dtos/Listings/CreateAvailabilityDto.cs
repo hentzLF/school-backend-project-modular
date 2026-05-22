@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Listings;
 
-internal sealed class CreateAvailabilityDto
+public sealed class CreateAvailabilityDto
 {
     [Required]
     public Guid ListingId { get; init; }

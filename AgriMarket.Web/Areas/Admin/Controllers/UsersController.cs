@@ -1,5 +1,7 @@
-using AgriMarket.BLL.Dtos.Users;
-using AgriMarket.BLL.Services;
+using AgriMarket.Modules.Users.Dtos;
+using AgriMarket.Modules.Bookings.Services;
+using AgriMarket.Modules.Marketplace.Services;
+using AgriMarket.Modules.Users.Services;
 using AgriMarket.Web.Areas.Admin.ViewModels;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;

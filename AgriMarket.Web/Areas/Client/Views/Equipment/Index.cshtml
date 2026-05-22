@@ -53,7 +53,7 @@ else
                             <form asp-action="UpdateStatus" asp-route-id="@item.Id" method="post" class="d-inline ms-1">
                                 @Html.AntiForgeryToken()
                                 <select name="status" onchange="this.form.submit()" class="form-select form-select-sm d-inline-block w-auto">
-                                    @foreach (var s in Enum.GetValues<AgriMarket.Domain.Enums.EquipmentStatus>())
+                                    @foreach (var s in Enum.GetValues<AgriMarket.Modules.Marketplace.Enums.EquipmentStatus>())
                                     {
                                         <option value="@s" selected="@(item.Status == s.ToString())">
                                             @Localizer[$"EquipmentStatus_{s}"]

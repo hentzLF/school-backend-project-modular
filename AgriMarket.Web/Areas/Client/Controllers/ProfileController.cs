@@ -1,4 +1,4 @@
-using AgriMarket.BLL.Services;
+using AgriMarket.Modules.Users.Services;
 using AgriMarket.Web.Areas.Client.ViewModels.Profile;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;
@@ -39,7 +39,7 @@ public class ProfileController(IUserService userService) : Controller
         var profileDto = await GetProfileAsync();
         if (profileDto == null) return Unauthorized();
 
-        await userService.UpdateProfileAsync(new AgriMarket.BLL.Dtos.Users.UserProfileDto
+        await userService.UpdateProfileAsync(new AgriMarket.Modules.Users.Dtos.UserProfileDto
         {
             Id = profileDto.Id,
             FirstName = model.FirstName,
@@ -54,7 +54,7 @@ public class ProfileController(IUserService userService) : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    private async Task<AgriMarket.BLL.Dtos.Users.UserProfileDto?> GetProfileAsync()
+    private async Task<AgriMarket.Modules.Users.Dtos.UserProfileDto?> GetProfileAsync()
     {
         var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!Guid.TryParse(userIdStr, out var userId)) return null;

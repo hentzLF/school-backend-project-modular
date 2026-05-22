@@ -1,4 +1,4 @@
-using AgriMarket.BLL.Dtos.Users;
+using AgriMarket.Modules.Users.Dtos;
 using AgriMarket.Web.Areas.Admin.ViewModels;
 using AgriMarket.Web.Areas.Client.ViewModels.Profile;
 
@@ -8,7 +8,7 @@ public static class UserViewModelMapper
 {
     public static ProfileViewModel ToProfileViewModel(this UserProfileDto dto, string role)
     {
-        Enum.TryParse<AgriMarket.Domain.Enums.RoleType>(role, out var parsedRole);
+        Enum.TryParse<AgriMarket.Modules.Users.Enums.RoleType>(role, out var parsedRole);
         return new ProfileViewModel
         {
             FirstName = dto.FirstName,

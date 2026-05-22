@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Entities;
 
-internal sealed class County
+public sealed class County
 {
     public Guid Id { get; set; }
 

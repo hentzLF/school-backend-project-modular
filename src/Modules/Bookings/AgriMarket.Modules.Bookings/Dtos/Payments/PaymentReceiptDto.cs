@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Bookings.Dtos.Payments;
 
-internal sealed record PaymentReceiptDto(
+public sealed record PaymentReceiptDto(
     Guid PaymentId,
     Guid BookingId,
     decimal Amount,

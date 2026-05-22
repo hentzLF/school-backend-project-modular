@@ -45,7 +45,7 @@
             <div class="form-group mb-3">
                 <label asp-for="Condition" class="control-label">@Localizer["Equipment_Condition"]</label>
                 <select asp-for="Condition" class="form-control"
-                        asp-items="@(new SelectList(Enum.GetValues<AgriMarket.Domain.Enums.EquipmentCondition>()))">
+                        asp-items="@(new SelectList(Enum.GetValues<AgriMarket.Modules.Marketplace.Enums.EquipmentCondition>()))">
                 </select>
                 <span asp-validation-for="Condition" class="text-danger"></span>
             </div>

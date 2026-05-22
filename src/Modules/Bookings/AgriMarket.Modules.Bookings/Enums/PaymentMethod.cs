@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Bookings.Enums;
 
-internal enum PaymentMethod
+public enum PaymentMethod
 {
     Card = 1,
     BankTransfer = 2,

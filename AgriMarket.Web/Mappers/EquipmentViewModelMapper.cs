@@ -1,4 +1,4 @@
-using AgriMarket.BLL.Dtos.Equipment;
+using AgriMarket.Modules.Marketplace.Dtos.Equipment;
 using AgriMarket.Web.Areas.Client.ViewModels.Equipment;
 
 namespace AgriMarket.Web.Mappers;

@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Bookings.Dtos.Dashboard;
 
-internal sealed class ProviderDashboardDto
+public sealed class ProviderDashboardDto
 {
     public decimal TotalEarnings { get; init; }
     public decimal MoneyHeld { get; init; }

@@ -1,4 +1,4 @@
-using AgriMarket.Domain.Enums;
+using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 

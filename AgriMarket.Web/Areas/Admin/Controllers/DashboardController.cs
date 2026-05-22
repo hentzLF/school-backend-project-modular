@@ -1,5 +1,5 @@
-using AgriMarket.BLL.Services;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Modules.Bookings.Services;
+using AgriMarket.Modules.Bookings.Enums;
 using AgriMarket.Web.Areas.Admin.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

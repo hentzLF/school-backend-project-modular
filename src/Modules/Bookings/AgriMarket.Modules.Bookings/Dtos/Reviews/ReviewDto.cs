@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Bookings.Dtos.Reviews;
 
-internal sealed class ReviewDto
+public sealed class ReviewDto
 {
     public Guid Id { get; init; }
     public int Rating { get; init; }

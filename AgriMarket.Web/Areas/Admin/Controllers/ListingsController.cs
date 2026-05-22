@@ -1,4 +1,6 @@
-using AgriMarket.BLL.Services;
+using AgriMarket.Modules.Marketplace.Services;
+using AgriMarket.Shared.Exceptions;
+using AgriMarket.Modules.Bookings.Services;
 using AgriMarket.Web.Areas.Admin.ViewModels;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;
@@ -70,7 +72,7 @@ public class ListingsController(IListingService listingService, ICategoryService
         {
             return NotFound();
         }
-        catch (BLL.BusinessRuleException ex)
+        catch (BusinessRuleException ex)
         {
             TempData["ErrorMessage"] = ex.Message;
             return RedirectToAction(nameof(Edit), new { id = vm.Id });
@@ -100,7 +102,7 @@ public class ListingsController(IListingService listingService, ICategoryService
         {
             return NotFound();
         }
-        catch (BLL.BusinessRuleException ex)
+        catch (BusinessRuleException ex)
         {
             TempData["ErrorMessage"] = ex.Message;
             return RedirectToAction(nameof(Index));

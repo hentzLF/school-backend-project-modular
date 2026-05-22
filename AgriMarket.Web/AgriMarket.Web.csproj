@@ -5,19 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AgriMarket.DAL\AgriMarket.DAL.csproj" />
-    <ProjectReference Include="..\AgriMarket.BLL\AgriMarket.BLL.csproj" />
+    <ProjectReference Include="..\src\Shared\AgriMarket.Shared\AgriMarket.Shared.csproj" />
+    <ProjectReference Include="..\src\Modules\Users\AgriMarket.Modules.Users\AgriMarket.Modules.Users.csproj" />
+    <ProjectReference Include="..\src\Modules\Users\AgriMarket.Modules.Users.Contracts\AgriMarket.Modules.Users.Contracts.csproj" />
+    <ProjectReference Include="..\src\Modules\Marketplace\AgriMarket.Modules.Marketplace\AgriMarket.Modules.Marketplace.csproj" />
+    <ProjectReference Include="..\src\Modules\Marketplace\AgriMarket.Modules.Marketplace.Contracts\AgriMarket.Modules.Marketplace.Contracts.csproj" />
+    <ProjectReference Include="..\src\Modules\Bookings\AgriMarket.Modules.Bookings\AgriMarket.Modules.Bookings.csproj" />
+    <ProjectReference Include="..\src\Modules\Bookings\AgriMarket.Modules.Bookings.Contracts\AgriMarket.Modules.Bookings.Contracts.csproj" />
+    <ProjectReference Include="..\src\Modules\Messaging\AgriMarket.Modules.Messaging\AgriMarket.Modules.Messaging.csproj" />
+    <ProjectReference Include="..\src\Modules\Messaging\AgriMarket.Modules.Messaging.Contracts\AgriMarket.Modules.Messaging.Contracts.csproj" />
     <ProjectReference Include="..\AgriMarket.Resources\AgriMarket.Resources.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.7" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
   </ItemGroup>
 
 </Project>

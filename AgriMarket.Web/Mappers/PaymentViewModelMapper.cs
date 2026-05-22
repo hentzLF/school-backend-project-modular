@@ -1,5 +1,5 @@
-using AgriMarket.BLL.Dtos.Payments;
-using AgriMarket.Domain.Entities;
+using AgriMarket.Modules.Bookings.Dtos.Payments;
+using AgriMarket.Modules.Bookings.Entities;
 using AgriMarket.Web.Areas.Admin.ViewModels;
 using AgriMarket.Web.Areas.Client.ViewModels.Payments;
 

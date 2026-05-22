@@ -1,5 +1,6 @@
-using AgriMarket.BLL;
-using AgriMarket.BLL.Services;
+using AgriMarket.Shared.Exceptions;
+using AgriMarket.Modules.Users.Services;
+using AgriMarket.Modules.Bookings.Services;
 using AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;

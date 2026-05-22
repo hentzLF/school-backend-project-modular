@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Dtos.Listings;
 
-internal sealed class ListingSummaryDto
+public sealed class ListingSummaryDto
 {
     public Guid Id { get; init; }
     public string Title { get; init; } = default!;

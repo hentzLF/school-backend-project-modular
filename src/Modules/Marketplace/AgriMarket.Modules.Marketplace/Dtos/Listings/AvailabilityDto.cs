@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Dtos.Listings;
 
-internal sealed class AvailabilityDto
+public sealed class AvailabilityDto
 {
     public Guid Id { get; init; }
     public DateTime StartTime { get; init; }

@@ -1,4 +1,4 @@
-using AgriMarket.BLL.Dtos.Listings;
+using AgriMarket.Modules.Marketplace.Dtos.Listings;
 using AgriMarket.Web.Areas.Admin.ViewModels;
 using AgriMarket.Web.Areas.Client.ViewModels.Equipment;
 using AgriMarket.Web.Areas.Client.ViewModels.Listings;

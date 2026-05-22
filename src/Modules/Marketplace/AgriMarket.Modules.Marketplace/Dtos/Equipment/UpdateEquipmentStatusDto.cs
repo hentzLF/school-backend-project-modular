@@ -3,7 +3,7 @@ using AgriMarket.Modules.Marketplace.Enums;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Equipment;
 
-internal sealed class UpdateEquipmentStatusDto
+public sealed class UpdateEquipmentStatusDto
 {
     [Required]
     [EnumDataType(typeof(EquipmentStatus))]

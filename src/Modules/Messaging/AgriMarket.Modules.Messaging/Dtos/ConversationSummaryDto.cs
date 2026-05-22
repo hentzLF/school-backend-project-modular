@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Messaging.Dtos;
 
-internal sealed class ConversationSummaryDto
+public sealed class ConversationSummaryDto
 {
     public Guid Id { get; init; }
     public Guid? BookingId { get; init; }

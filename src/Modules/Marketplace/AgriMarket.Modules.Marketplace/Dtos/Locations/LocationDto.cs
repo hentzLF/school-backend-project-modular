@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Dtos.Locations;
 
-internal sealed record LocationDto(
+public sealed record LocationDto(
     Guid Id,
     Guid MunicipalityId,
     string MunicipalityName,

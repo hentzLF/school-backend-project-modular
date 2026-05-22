@@ -1,4 +1,4 @@
-using AgriMarket.BLL.Dtos.Messaging;
+using AgriMarket.Modules.Messaging.Dtos;
 using AgriMarket.Web.Areas.Client.ViewModels.Messaging;
 
 namespace AgriMarket.Web.Mappers;

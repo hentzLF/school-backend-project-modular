@@ -1,5 +1,6 @@
-using AgriMarket.BLL.Services;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Modules.Bookings.Services;
+using AgriMarket.Modules.Bookings.Enums;
+using AgriMarket.Modules.Users.Services;
 using AgriMarket.Web.Areas.Admin.ViewModels;
 using AgriMarket.Web.Mappers;
 using Microsoft.AspNetCore.Authorization;
@@ -12,10 +13,17 @@ namespace AgriMarket.Web.Areas.Admin.Controllers;
 public class PaymentsController : Controller
 {
     private readonly IPaymentService _paymentService;
+    private readonly IBookingService _bookingService;
+    private readonly IUserService _userService;
 
-    public PaymentsController(IPaymentService paymentService)
+    public PaymentsController(
+        IPaymentService paymentService,
+        IBookingService bookingService,
+        IUserService userService)
     {
         _paymentService = paymentService;
+        _bookingService = bookingService;
+        _userService = userService;
     }
 
     public async Task<IActionResult> Index(PaymentStatus? status)
@@ -38,10 +46,14 @@ public class PaymentsController : Controller
 
         if (payment == null) return NotFound();
 
-        var booking = payment.Booking;
-        var listing = booking?.ServiceListing;
-        var clientProfile = booking?.ClientProfile;
-        var providerProfile = listing?.UserProfile;
+        var booking = await _bookingService.GetByIdAsync(payment.BookingId);
+        string providerName = "Unknown";
+        if (booking != null)
+        {
+            var provider = await _userService.GetProfileByIdAsync(booking.ProviderProfileId);
+            if (provider != null)
+                providerName = $"{provider.FirstName} {provider.LastName}";
+        }
 
         var vm = new PaymentDetailViewModel
         {
@@ -53,16 +65,12 @@ public class PaymentsController : Controller
             ReleasedAt = payment.ReleasedAt,
             BookingId = payment.BookingId,
             BookingStatus = booking?.Status ?? default,
-            ListingId = listing?.Id ?? default,
-            ListingTitle = listing?.Title ?? "Unknown",
-            ClientName = clientProfile != null
-                ? $"{clientProfile.FirstName} {clientProfile.LastName}"
-                : "Unknown",
+            ListingId = booking?.ServiceListingId ?? default,
+            ListingTitle = booking?.ListingTitle ?? "Unknown",
+            ClientName = booking?.ClientName ?? "Unknown",
             ClientProfileId = booking?.ClientProfileId ?? default,
-            ProviderName = providerProfile != null
-                ? $"{providerProfile.FirstName} {providerProfile.LastName}"
-                : "Unknown",
-            ProviderProfileId = listing?.UserProfileId ?? default
+            ProviderName = providerName,
+            ProviderProfileId = booking?.ProviderProfileId ?? default
         };
 
         return View(vm);

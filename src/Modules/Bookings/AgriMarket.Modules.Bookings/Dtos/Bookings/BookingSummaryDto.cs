@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Modules.Bookings.Dtos.Bookings;
 
-internal sealed class BookingSummaryDto
+public sealed class BookingSummaryDto
 {
     public Guid Id { get; init; }
     public string ClientName { get; init; } = default!;

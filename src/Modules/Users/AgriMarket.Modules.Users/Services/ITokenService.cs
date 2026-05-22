@@ -3,7 +3,7 @@ using AgriMarket.Modules.Users.Enums;
 
 namespace AgriMarket.Modules.Users.Services;
 
-internal interface ITokenService
+public interface ITokenService
 {
     string GenerateAccessToken(AppUser user, UserProfile profile, IEnumerable<RoleType> roles);
     string GenerateRefreshToken();

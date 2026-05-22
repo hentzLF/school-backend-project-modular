@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Enums;
 
-internal enum EquipmentStatus
+public enum EquipmentStatus
 {
     Available = 1,
     InUse = 2,
