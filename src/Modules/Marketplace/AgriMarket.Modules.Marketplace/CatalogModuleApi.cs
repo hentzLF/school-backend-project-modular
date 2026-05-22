@@ -11,10 +11,7 @@ internal sealed class CatalogModuleApi(
     public async Task<ListingSummaryDto?> GetListingSummaryAsync(Guid listingId, CancellationToken ct = default)
     {
         var l = await listings.GetByIdAsync(listingId, ct);
-        if (l is null)
-            return null;
-
-        return new ListingSummaryDto(l.Id, l.Title, l.PricePerHectare, l.IsActive, l.UserProfileId, l.ServiceCategoryId, l.LocationId);
+        return l is null ? null : ToSummary(l);
     }
 
     public async Task<IReadOnlyDictionary<Guid, ListingSummaryDto>> GetListingSummariesAsync(
@@ -25,9 +22,7 @@ internal sealed class CatalogModuleApi(
             return new Dictionary<Guid, ListingSummaryDto>();
 
         var found = await listings.FindAsync(l => listingIds.Contains(l.Id), ct);
-        return found.ToDictionary(
-            l => l.Id,
-            l => new ListingSummaryDto(l.Id, l.Title, l.PricePerHectare, l.IsActive, l.UserProfileId, l.ServiceCategoryId, l.LocationId));
+        return found.ToDictionary(l => l.Id, ToSummary);
     }
 
     public async Task<AvailabilityDto?> GetAvailabilityAsync(Guid availabilityId, CancellationToken ct = default)
@@ -38,4 +33,20 @@ internal sealed class CatalogModuleApi(
 
         return new AvailabilityDto(a.Id, a.ServiceListingId, a.StartTime, a.EndTime, a.IsBooked);
     }
+
+    public Task<int> CountListingsAsync(bool? isActive = null, CancellationToken ct = default)
+        => isActive is null
+            ? listings.CountAsync(_ => true, ct)
+            : listings.CountAsync(l => l.IsActive == isActive.Value, ct);
+
+    public async Task<IReadOnlyCollection<ListingSummaryDto>> GetListingsByProviderAsync(
+        Guid providerProfileId,
+        CancellationToken ct = default)
+    {
+        var found = await listings.FindAsync(l => l.UserProfileId == providerProfileId, ct);
+        return found.Select(ToSummary).ToList();
+    }
+
+    private static ListingSummaryDto ToSummary(ServiceListing l) =>
+        new(l.Id, l.Title, l.PricePerHectare, l.IsActive, l.UserProfileId, l.ServiceCategoryId, l.LocationId);
 }

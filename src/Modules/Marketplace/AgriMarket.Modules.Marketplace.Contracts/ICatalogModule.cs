@@ -9,4 +9,12 @@ public interface ICatalogModule
         CancellationToken ct = default);
 
     Task<AvailabilityDto?> GetAvailabilityAsync(Guid availabilityId, CancellationToken ct = default);
+
+    /// <summary>Total listing count, optionally filtered by active state.</summary>
+    Task<int> CountListingsAsync(bool? isActive = null, CancellationToken ct = default);
+
+    /// <summary>All listing summaries owned by a single provider profile.</summary>
+    Task<IReadOnlyCollection<ListingSummaryDto>> GetListingsByProviderAsync(
+        Guid providerProfileId,
+        CancellationToken ct = default);
 }
