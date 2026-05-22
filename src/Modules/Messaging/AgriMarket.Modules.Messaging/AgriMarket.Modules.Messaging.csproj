@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="AgriMarket.Api" />
+    <InternalsVisibleTo Include="AgriMarket.Tests" />
+  </ItemGroup>
 </Project>

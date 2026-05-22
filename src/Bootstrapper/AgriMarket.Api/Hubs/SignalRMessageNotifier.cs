@@ -1,12 +1,17 @@
-using AgriMarket.BLL.Contracts;
-using AgriMarket.BLL.Dtos.Messaging;
+using AgriMarket.Modules.Messaging.Contracts;
+using AgriMarket.Modules.Messaging.Hubs;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AgriMarket.Api.Hubs;
 
-public class SignalRMessageNotifier(IHubContext<MessageHub> hubContext) : IMessageNotifier
+/// <summary>
+/// SignalR-backed implementation of the Messaging module's
+/// <see cref="IMessageNotifier"/> seam. Lives in the bootstrapper because it
+/// owns the SignalR transport.
+/// </summary>
+internal sealed class SignalRMessageNotifier(IHubContext<MessageHub> hubContext) : IMessageNotifier
 {
-    public async Task NotifyMessageSentAsync(Guid conversationId, MessageDto message)
+    public async Task NotifyMessageSentAsync(Guid conversationId, MessageNotificationDto message)
     {
         await hubContext.Clients
             .Group(MessageHub.GroupName(conversationId))

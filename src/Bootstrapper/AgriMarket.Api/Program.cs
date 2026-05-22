@@ -1,14 +1,19 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Text;
-using AgriMarket.BLL;
-using AgriMarket.BLL.Services;
-using AgriMarket.DAL;
-using AgriMarket.DAL.Seeding;
+using AgriMarket.Api.Hubs;
+using AgriMarket.Modules.Bookings;
+using AgriMarket.Modules.Marketplace;
+using AgriMarket.Modules.Messaging;
+using AgriMarket.Modules.Messaging.Contracts;
+using AgriMarket.Modules.Messaging.Hubs;
+using AgriMarket.Modules.Users;
+using AgriMarket.Shared.Modules;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.IdentityModel.Tokens;
-using AgriMarket.Api.Hubs;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,11 +23,22 @@ var jwtKey = builder.Configuration["Jwt:Key"];
 if (string.IsNullOrWhiteSpace(jwtKey))
     throw new InvalidOperationException("Jwt:Key is missing from configuration.");
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("DefaultConnection is missing from configuration.");
+// ---- Modules: each owns its services, DbContext, controllers and DB lifecycle ----
+IModule[] modules =
+[
+    new UsersModule(),
+    new MarketplaceModule(),
+    new BookingsModule(),
+    new MessagingModule(),
+];
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+foreach (var module in modules)
+    module.RegisterServices(builder.Services, builder.Configuration);
+
+var moduleAssemblies = modules.Select(m => m.GetType().Assembly).ToArray();
+
+// MediatR — integration events and their handlers span every module assembly
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(moduleAssemblies));
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -38,12 +54,21 @@ builder.Services.AddApiVersioning(options =>
     options.SubstituteApiVersionInUrl = true;
 });
 
-builder.Services.AddControllers()
+// Controllers live inside the module assemblies — register each as an MVC
+// application part and discover their (internal) controllers via a custom
+// feature provider.
+var mvcBuilder = builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
     });
+
+foreach (var assembly in moduleAssemblies)
+    mvcBuilder.AddApplicationPart(assembly);
+
+mvcBuilder.ConfigureApplicationPartManager(manager =>
+    manager.FeatureProviders.Add(new InternalControllerFeatureProvider()));
 
 builder.Services.AddCors(options =>
     options.AddDefaultPolicy(p => p
@@ -92,14 +117,13 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("role", "Admin"));
 });
 
-// Dependency Inversion
-builder.Services.AddDal();
-builder.Services.AddBll();
-
 builder.Services.AddSignalR()
     .AddJsonProtocol(options =>
         options.PayloadSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase);
-builder.Services.AddScoped<AgriMarket.BLL.Contracts.IMessageNotifier, AgriMarket.Api.Hubs.SignalRMessageNotifier>();
+
+// SignalR-backed real-time delivery for the Messaging module.
+builder.Services.AddScoped<IMessageNotifier, SignalRMessageNotifier>();
+
 builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -122,12 +146,11 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+// Each module applies its own migrations and runs its seeders.
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await context.Database.MigrateAsync();
-    var passwordHasher = scope.ServiceProvider.GetRequiredService<AgriMarket.BLL.Contracts.IPasswordHasher>();
-    await AppDbSeeder.SeedAsync(context, passwordHasher);
+    foreach (var module in modules)
+        await module.InitializeDatabaseAsync(scope.ServiceProvider);
 }
 
 app.UseExceptionHandler();
@@ -144,4 +167,27 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHub<MessageHub>("/hubs/messages");
 
+foreach (var module in modules)
+    module.MapEndpoints(app);
+
 app.Run();
+
+/// <summary>
+/// Discovers controllers regardless of visibility. Module controllers are
+/// <c>internal</c> (the module core exposes no public surface beyond its
+/// <c>IModule</c>), so the default public-only discovery would miss them.
+/// </summary>
+internal sealed class InternalControllerFeatureProvider : ControllerFeatureProvider
+{
+    protected override bool IsController(TypeInfo typeInfo)
+    {
+        if (!typeInfo.IsClass || typeInfo.IsAbstract || typeInfo.ContainsGenericParameters)
+            return false;
+
+        if (typeInfo.IsDefined(typeof(NonControllerAttribute)))
+            return false;
+
+        return typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
+            || typeInfo.IsDefined(typeof(ControllerAttribute));
+    }
+}
