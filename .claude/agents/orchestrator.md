@@ -96,6 +96,7 @@ After each task block: build → test → review → **commit** → report → u
 - Run `dotnet build` before committing — never commit broken code
 - One logical change per commit — matches one task block
 - Commit message should describe WHAT was done, not reference the task number
+- **NEVER run `git push`** — human reviews and pushes manually
 
 ## Context Management
 

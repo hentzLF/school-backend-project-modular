@@ -25,10 +25,23 @@
     ],
     "deny": [
       "Bash(rm -rf *)",
-      "Bash(git push --force *)",
+      "Bash(git push *)",
       "Bash(git reset --hard *)",
       "Bash(git clean -f *)",
       "PowerShell(Remove-Item -Recurse -Force *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'if echo \"$CLAUDE_TOOL_INPUT\" | grep -qi \"git push\"; then echo \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"PreToolUse\\\",\\\"permissionDecision\\\":\\\"deny\\\",\\\"permissionDecisionReason\\\":\\\"git push is blocked — human pushes manually\\\"}}\" && exit 0; fi'"
+          }
+        ]
+      }
     ]
   },
   "env": {
