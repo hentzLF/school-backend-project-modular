@@ -47,5 +47,9 @@
   "env": {
     "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
     "DOTNET_NOLOGO": "1"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /workspace/.claude/statusline-command.sh"
   }
 }
