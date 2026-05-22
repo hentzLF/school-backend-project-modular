@@ -1,74 +1,109 @@
-# Claude Code Instructions
+# AgriMarket — Modular Monolith
 
-## Before modifying code
+Agricultural service marketplace built with ASP.NET Core (.NET 10), PostgreSQL, MediatR.
 
-Before any codebase modification (creating, editing, deleting), always start with a structured summary:
+## Quick Reference
 
-- **What we're doing:** (short description of the action)
-- **Why we're doing it:** (reasoning)
-- **What files we are affecting:** (list of files)
-- **Why those files:** (explanation)
-- **What this changes in our codebase:** (impact description)
-
-### Functions & Methods
-
-- **One function = one job.** If you need to describe what a function does using the word "and", it should be two functions.
-- **The name IS the documentation.** A function's name should fully describe what it does. If the name is accurate, comments are unnecessary.
-- **Extract, don't nest.** If a function contains a block of logic that does a subtask, extract it into a separate function with a descriptive name. The parent function should read like a high-level summary.
-
-Example — bad:
-```csharp
-[HttpPost]
-public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
-{
-    if (request.Items == null || !request.Items.Any())
-        return BadRequest("Order must contain items");
-    if (request.Items.Any(i => i.Quantity <= 0))
-        return BadRequest("Invalid quantity");
-
-    var order = new Order { CustomerId = request.CustomerId };
-    foreach (var item in request.Items)
-    {
-        var product = await _context.Products.FindAsync(item.ProductId);
-        order.Lines.Add(new OrderLine { Product = product, Quantity = item.Quantity });
-        order.Total += product.Price * item.Quantity;
-    }
-
-    if (await _context.Customers.AnyAsync(c => c.Id == request.CustomerId && c.IsPremium))
-        order.Total *= 0.9m;
-
-    _context.Orders.Add(order);
-    await _context.SaveChangesAsync();
-    await _emailService.SendAsync(order.CustomerId, "Order confirmed", $"Order {order.Id}");
-
-    return CreatedAtAction(nameof(GetOrder), new { id = order.Id }, order);
-}
+```bash
+dotnet build                                    # Build all projects
+dotnet test                                     # Run unit + integration tests
+dotnet test AgriMarket.Tests/                   # Unit/integration only
+dotnet test AgriMarket.E2E/                     # E2E (requires Docker for Testcontainers)
+dotnet format                                   # Auto-format
+dotnet ef migrations add <Name> --context <ModuleDbContext> --project <ModulePath>
 ```
 
-Example — good:
-```csharp
-[HttpPost]
-public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
-{
-    var validationResult = ValidateOrderRequest(request);
-    if (validationResult is not null)
-        return validationResult;
+## Architecture: Modular Monolith
 
-    var order = await BuildOrder(request);
-    await ApplyPremiumDiscount(order);
-    await SaveOrder(order);
-    await SendOrderConfirmation(order);
+Organized by **business domain**, not by technical layer. Each module owns its entities, services, repositories, controllers, and DbContext.
 
-    return CreatedAtAction(nameof(GetOrder), new { id = order.Id }, order);
-}
+```
+src/
+  Bootstrapper/AgriMarket.Api/        # Composition root, Swagger, JWT, SignalR
+  Modules/
+    Users/          (.Contracts + core)  # Auth, profiles, roles
+    Marketplace/    (.Contracts + core)  # Listings, categories, equipment, locations
+    Bookings/       (.Contracts + core)  # Bookings, payments, reviews
+    Messaging/      (.Contracts + core)  # Conversations, messages, SignalR hub
+  Shared/AgriMarket.Shared/            # IModule, base classes, integration events
+  AgriMarket.Web/                      # MVC UI (Admin + Client areas)
 ```
 
-The controller action reads like a summary. Each extracted method is self-explanatory, testable, and reusable.
+### Module Rules
 
-## Git Conventions
+- Each module = own `.csproj` + own `DbContext` + own DB schema
+- Implementation classes are `internal` — only Contracts (interfaces + DTOs) are `public`
+- Modules NEVER reference each other directly — only through `.Contracts` projects
+- Inter-module communication via **MediatR** (`INotification` for events, `ICatalogModule` interfaces for queries)
+- Module registration via `IModule.RegisterServices()` + `IModule.MapEndpoints()` in Program.cs
 
-- Use conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`
-- Keep subject lines under 72 characters
-- Write commit messages in English, imperative mood ("Add endpoint", not "Added endpoint")
-- Always run `dotnet build` before committing to verify compilation
-- One logical change per commit — don't bundle unrelated changes
+### Module Communication Patterns
+
+| Pattern | When | Example |
+|---------|------|---------|
+| **Contracts interface** | Synchronous query across modules | `IUsersModule.GetUserProfileAsync(userId)` |
+| **MediatR INotification** | Async event (fire-and-forget) | `BookingConfirmedEvent` -> Messaging creates conversation |
+| **Shared DTOs** | Return types in Contracts | `UserSummaryDto`, `ListingSummaryDto` |
+
+## Tech Stack
+
+- .NET 10, ASP.NET Core, EF Core 10 + Npgsql (PostgreSQL)
+- MediatR for CQRS + inter-module events
+- JWT Bearer (API) + Cookie auth (MVC)
+- SignalR for real-time messaging
+- Swashbuckle (Swagger) + Asp.Versioning (API v1 via URL segment)
+- xUnit + FluentAssertions + Moq (unit/integration)
+- Playwright + Testcontainers (E2E)
+- Docker Compose + GitLab CI/CD
+
+## Database
+
+- Single PostgreSQL instance, **one schema per module**: `users.*`, `marketplace.*`, `bookings.*`, `messaging.*`
+- Each module has its own `DbContext` with `HasDefaultSchema("module_name")`
+- Migrations per module: always specify `--context` flag
+- Seeded data: Estonian counties/municipalities (EHAK codes), service categories
+
+## Conventions
+
+### Code Style
+
+- One function = one job. Extract, don't nest.
+- Functions < 50 lines, files < 800 lines
+- `record` for immutable DTOs, `class` for entities with lifecycle
+- All implementation classes `internal` unless in a Contracts project
+- `sealed` on non-inherited classes
+- `CancellationToken` on all public async APIs
+- No `ViewBag`/`ViewData` in MVC — use ViewModels exclusively
+- Run `dotnet format` before committing
+
+### Git
+
+- Conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`
+- Subject lines < 72 chars, English, imperative mood
+- Run `dotnet build` before committing
+- One logical change per commit
+
+### Testing
+
+- Minimum 80% coverage
+- AAA pattern (Arrange-Act-Assert)
+- Naming: `MethodName_Scenario_ExpectedResult`
+- Unit tests mock cross-module dependencies via Contracts interfaces
+- Integration tests use `WebApplicationFactory`
+- E2E tests use Playwright + Testcontainers (real PostgreSQL)
+
+## Key Decisions
+
+- MVC Web shares BLL services with API — no direct DbContext access from controllers
+- IDOR protection: all API controllers verify resource ownership via JWT claims (`sub`, `profileId`, `role`)
+- i18n: UI via `.resx` files (en, et)
+- Admin area: full CRUD, protected by `AdminOnly` policy
+- Real-time: SignalR MessageHub with JWT auth via query string
+
+## What NOT to Do
+
+- Do NOT create cross-module entity references (use DTOs from Contracts)
+- Do NOT add `public` to implementation classes inside modules
+- Do NOT query another module's DbContext directly
+- Do NOT use `ViewBag`/`ViewData` — use ViewModels
+- Do NOT skip `dotnet build` verification before commits
