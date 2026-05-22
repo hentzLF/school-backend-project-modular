@@ -33,6 +33,7 @@ public sealed class MarketplaceModule : IModule
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ILocationLookupService, LocationLookupService>();
         services.AddScoped<IEquipmentService, EquipmentService>();
+        services.AddScoped<IListingService, ListingService>();
         services.AddScoped<ICatalogModule, CatalogModuleApi>();
     }
 

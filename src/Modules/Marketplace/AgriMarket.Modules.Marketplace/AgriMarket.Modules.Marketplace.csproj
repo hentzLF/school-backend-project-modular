@@ -3,6 +3,8 @@
   <ItemGroup>
     <ProjectReference Include="../../../Shared/AgriMarket.Shared/AgriMarket.Shared.csproj" />
     <ProjectReference Include="../AgriMarket.Modules.Marketplace.Contracts/AgriMarket.Modules.Marketplace.Contracts.csproj" />
+    <ProjectReference Include="../../Users/AgriMarket.Modules.Users.Contracts/AgriMarket.Modules.Users.Contracts.csproj" />
+    <ProjectReference Include="../../Bookings/AgriMarket.Modules.Bookings.Contracts/AgriMarket.Modules.Bookings.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
