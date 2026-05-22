@@ -112,11 +112,11 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 13. Bookings repositories and services
 
-- [ ] 13.1 Move `EfBookingRepository` and `EfPaymentRepository` into the module as `internal`
-- [ ] 13.2 Move `BookingService`, `PaymentService`, `ClientPaymentService`, `ReviewService`, `DashboardService`, `ProviderDashboardService` (interfaces + DTOs); replace cross-module `.Include()` with `Users`/`Marketplace` `.Contracts` calls
-- [ ] 13.3 Implement `IBookingsModule`; publish `BookingConfirmedEvent` when a booking is confirmed
-- [ ] 13.4 Verify build
-- [ ] 13.5 Git commit: `feat: add Bookings module repositories and services`
+- [x] 13.1 Move `EfBookingRepository` and `EfPaymentRepository` into the module as `internal` (cross-module `.Include()`/`.ThenInclude()` chains removed)
+- [~] 13.2 Move `PaymentService` (faithful internal port). `BookingService`, `ClientPaymentService`, `ReviewService`, `DashboardService`, `ProviderDashboardService` DEFERRED to Phase 6 — all have hard cross-module dependencies (Users/Marketplace types and services)
+- [~] 13.3 Implement `IBookingsModule` (the internal `BookingsModuleApi` adapter). `BookingConfirmedEvent` publishing deferred to Phase 6 with `BookingService`
+- [x] 13.4 Verify build
+- [x] 13.5 Git commit: `feat: add Bookings module repositories and PaymentService`
 
 ## 14. Bookings module registration
 
