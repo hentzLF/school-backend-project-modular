@@ -1,7 +1,7 @@
 # Project Status
 
 ## Current Phase
-Phase 4: Bookings module.
+Phase 5 (starting): Messaging module.
 
 ## Completed
 - [x] Phase 0: AI workflow setup (agents, rules, skills, settings, devcontainer)
@@ -17,9 +17,11 @@ Phase 4: Bookings module.
       MarketplaceDbContext (schema `marketplace`) + EHAK seeding, repositories,
       Category/Equipment/LocationLookup services, CatalogModuleApi,
       `MarketplaceModule : IModule`
+- [x] Phase 4: Bookings module — Contracts (IBookingsModule, BookingConfirmedEvent),
+      entities (Booking/Payment/Review), BookingsDbContext (schema `bookings`),
+      repositories, PaymentService, BookingsModuleApi, `BookingsModule : IModule`
 
 ## In Progress
-- [ ] Phase 4: Bookings module
 - [ ] Phase 5: Messaging module
 - [ ] Phase 6: MediatR integration events + composition
 - [ ] Phase 7: Cleanup old layered projects, update Docker/CI
@@ -30,6 +32,9 @@ Phase 4: Bookings module.
   contract.
 - `ListingService` (Marketplace) — depends on `IRepository<UserProfile>`,
   `IRepository<Booking>`, `IReviewService`, `BookingStatus`.
+- `BookingService`, `ClientPaymentService`, `ReviewService`, `DashboardService`,
+  `ProviderDashboardService` (Bookings) — depend on Users/Marketplace types and
+  services; `BookingConfirmedEvent` is published once `BookingService` lands.
 - Moving API/MVC controllers into modules — coupled to the bootstrapper's MVC
   application-part + API-versioning wiring.
 
