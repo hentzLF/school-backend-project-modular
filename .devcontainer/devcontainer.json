@@ -1,0 +1,41 @@
+{
+  "name": "AgriMarket Claude Code",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": true,
+      "dockerDashComposeVersion": "v2"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=claude-config-${devcontainerId},target=/home/vscode/.claude,type=volume",
+    "source=nuget-cache-${devcontainerId},target=/home/vscode/.nuget,type=volume"
+  ],
+  "containerEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "CLAUDE_CODE_OAUTH_TOKEN": "${localEnv:CLAUDE_CODE_OAUTH_TOKEN}",
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
+    "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
+    "DOTNET_NOLOGO": "1",
+    "TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE": "/var/run/docker.sock",
+    "DOCKER_HOST": "unix:///var/run/docker.sock"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  "postCreateCommand": "dotnet restore && dotnet tool restore",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace"
+}
