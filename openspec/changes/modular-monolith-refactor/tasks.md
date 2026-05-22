@@ -44,12 +44,12 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 5. Users module repositories and services
 
-- [ ] 5.1 Move `EfAppUserRepository`, `EfRefreshTokenRepository`, `EfUserProfileRepository` into the module as `internal`
-- [ ] 5.2 Move `BCryptPasswordHasher` and `IPasswordHasher` into the module
-- [ ] 5.3 Move `AuthService`, `TokenService`, `UserService` (and their interfaces + DTOs) into the module as `internal`
-- [ ] 5.4 Implement `IUsersModule` as an internal adapter over the module's services
-- [ ] 5.5 Verify build
-- [ ] 5.6 Git commit: `feat: add Users module repositories and services`
+- [x] 5.1 Move `EfAppUserRepository`, `EfRefreshTokenRepository`, `EfUserProfileRepository` into the module as `internal` (plus generic `EfRepository<T>`/`EfUnitOfWork`)
+- [x] 5.2 Move `BCryptPasswordHasher` and `IPasswordHasher` into the module
+- [~] 5.3 Move `AuthService`, `TokenService` (interfaces + Auth DTOs) into the module as `internal`. `UserService` extraction DEFERRED to Phase 6 — it has hard cross-module dependencies (Booking, Review, Message, ServiceListing, `IReviewService`) and needs a `UserDeletedEvent` integration event + a review-stats contract to extract cleanly
+- [x] 5.4 Implement `IUsersModule` as the internal `UsersModuleApi` adapter
+- [x] 5.5 Verify build
+- [x] 5.6 Git commit: `feat: add Users module repositories and services`
 
 ## 6. Users module registration
 

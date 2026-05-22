@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Users.Enums;
 
-public enum RoleType
+internal enum RoleType
 {
     Client = 1,
     Admin = 2,

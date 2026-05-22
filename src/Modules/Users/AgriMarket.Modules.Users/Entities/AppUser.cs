@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Users.Entities;
 
-internal class AppUser
+internal sealed class AppUser
 {
     public Guid Id { get; set; }
 
