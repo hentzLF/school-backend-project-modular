@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Modules.Messaging.Persistence;
 
-internal sealed class MessagingDbContext : DbContext
+public sealed class MessagingDbContext : DbContext
 {
     public MessagingDbContext(DbContextOptions<MessagingDbContext> options)
         : base(options)

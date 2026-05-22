@@ -17,10 +17,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AgriMarket.BLL\AgriMarket.BLL.csproj" />
-    <ProjectReference Include="..\AgriMarket.DAL\AgriMarket.DAL.csproj" />
+    <ProjectReference Include="..\src\Shared\AgriMarket.Shared\AgriMarket.Shared.csproj" />
+    <ProjectReference Include="..\src\Modules\Users\AgriMarket.Modules.Users\AgriMarket.Modules.Users.csproj" />
+    <ProjectReference Include="..\src\Modules\Users\AgriMarket.Modules.Users.Contracts\AgriMarket.Modules.Users.Contracts.csproj" />
+    <ProjectReference Include="..\src\Modules\Marketplace\AgriMarket.Modules.Marketplace\AgriMarket.Modules.Marketplace.csproj" />
+    <ProjectReference Include="..\src\Modules\Marketplace\AgriMarket.Modules.Marketplace.Contracts\AgriMarket.Modules.Marketplace.Contracts.csproj" />
+    <ProjectReference Include="..\src\Modules\Bookings\AgriMarket.Modules.Bookings\AgriMarket.Modules.Bookings.csproj" />
+    <ProjectReference Include="..\src\Modules\Bookings\AgriMarket.Modules.Bookings.Contracts\AgriMarket.Modules.Bookings.Contracts.csproj" />
+    <ProjectReference Include="..\src\Modules\Messaging\AgriMarket.Modules.Messaging\AgriMarket.Modules.Messaging.csproj" />
+    <ProjectReference Include="..\src\Modules\Messaging\AgriMarket.Modules.Messaging.Contracts\AgriMarket.Modules.Messaging.Contracts.csproj" />
     <ProjectReference Include="..\AgriMarket.Web\AgriMarket.Web.csproj" />
-    <ProjectReference Include="..\AgriMarket.Api\AgriMarket.Api.csproj" />
+    <ProjectReference Include="..\src\Bootstrapper\AgriMarket.Api\AgriMarket.Api.csproj" />
   </ItemGroup>
 
 </Project>

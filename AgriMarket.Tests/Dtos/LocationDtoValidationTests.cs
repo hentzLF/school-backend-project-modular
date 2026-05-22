@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using AgriMarket.BLL.Dtos.Locations;
+using AgriMarket.Modules.Marketplace.Dtos.Locations;
 using FluentAssertions;
 using Xunit;
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Modules.Bookings.Persistence;
 
-internal sealed class BookingsDbContext : DbContext
+public sealed class BookingsDbContext : DbContext
 {
     public BookingsDbContext(DbContextOptions<BookingsDbContext> options)
         : base(options)

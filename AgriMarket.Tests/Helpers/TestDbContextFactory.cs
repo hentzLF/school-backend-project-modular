@@ -1,24 +1,61 @@
-using AgriMarket.DAL;
-using AgriMarket.Domain.Entities;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Modules.Users.Entities;
+using AgriMarket.Modules.Users.Enums;
+using AgriMarket.Modules.Users.Persistence;
+using AgriMarket.Modules.Marketplace.Entities;
+using AgriMarket.Modules.Marketplace.Enums;
+using AgriMarket.Modules.Marketplace.Persistence;
+using AgriMarket.Modules.Bookings.Entities;
+using AgriMarket.Modules.Bookings.Enums;
+using AgriMarket.Modules.Bookings.Persistence;
+using AgriMarket.Modules.Messaging.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Tests.Helpers;
 
-public static class TestDbContextFactory
+internal static class TestDbContextFactory
 {
-    public static AppDbContext Create(string dbName)
+    public static UsersDbContext CreateUsersDb(string dbName = "test")
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase(dbName)
+        var options = new DbContextOptionsBuilder<UsersDbContext>()
+            .UseInMemoryDatabase(dbName + "_users_" + Guid.NewGuid())
             .Options;
-        var db = new AppDbContext(options);
+        var db = new UsersDbContext(options);
+        db.Database.EnsureCreated();
+        return db;
+    }
+
+    public static MarketplaceDbContext CreateMarketplaceDb(string dbName = "test")
+    {
+        var options = new DbContextOptionsBuilder<MarketplaceDbContext>()
+            .UseInMemoryDatabase(dbName + "_marketplace_" + Guid.NewGuid())
+            .Options;
+        var db = new MarketplaceDbContext(options);
+        db.Database.EnsureCreated();
+        return db;
+    }
+
+    public static BookingsDbContext CreateBookingsDb(string dbName = "test")
+    {
+        var options = new DbContextOptionsBuilder<BookingsDbContext>()
+            .UseInMemoryDatabase(dbName + "_bookings_" + Guid.NewGuid())
+            .Options;
+        var db = new BookingsDbContext(options);
+        db.Database.EnsureCreated();
+        return db;
+    }
+
+    public static MessagingDbContext CreateMessagingDb(string dbName = "test")
+    {
+        var options = new DbContextOptionsBuilder<MessagingDbContext>()
+            .UseInMemoryDatabase(dbName + "_messaging_" + Guid.NewGuid())
+            .Options;
+        var db = new MessagingDbContext(options);
         db.Database.EnsureCreated();
         return db;
     }
 
     public static (AppUser user, UserProfile profile) SeedClientUser(
-        AppDbContext db, string email, string password, RoleType role)
+        UsersDbContext db, string email, string password, RoleType role)
     {
         var user = new AppUser
         {
@@ -43,13 +80,11 @@ public static class TestDbContextFactory
         db.AppUsers.Add(user);
         db.UserProfiles.Add(profile);
         db.UserRoles.Add(userRole);
-
-
         db.SaveChanges();
         return (user, profile);
     }
 
-    public static void EnsureServiceCategory(AppDbContext db)
+    public static void EnsureServiceCategory(MarketplaceDbContext db)
     {
         var categoryId = Guid.Parse("a1b2c3d4-0001-0000-0000-000000000001");
         if (!db.ServiceCategories.Any(c => c.Id == categoryId))
@@ -64,7 +99,7 @@ public static class TestDbContextFactory
     }
 
     public static (ServiceListing listing, Availability availability) SeedListing(
-        AppDbContext db, Guid providerProfileId)
+        MarketplaceDbContext db, Guid providerProfileId)
     {
         EnsureServiceCategory(db);
         var categoryId = Guid.Parse("a1b2c3d4-0001-0000-0000-000000000001");
@@ -91,7 +126,7 @@ public static class TestDbContextFactory
         return (listing, availability);
     }
 
-    public static Equipment SeedEquipment(AppDbContext db, Guid providerProfileId)
+    public static Equipment SeedEquipment(MarketplaceDbContext db, Guid providerProfileId)
     {
         var equipment = new Equipment
         {
@@ -111,7 +146,7 @@ public static class TestDbContextFactory
     }
 
     public static Booking SeedBooking(
-        AppDbContext db, Guid clientProfileId, Guid listingId, Guid availabilityId,
+        BookingsDbContext db, Guid clientProfileId, Guid listingId, Guid availabilityId,
         BookingStatus status = BookingStatus.Pending)
     {
         var booking = new Booking

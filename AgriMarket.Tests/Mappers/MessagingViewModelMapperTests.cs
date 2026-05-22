@@ -1,5 +1,5 @@
-using AgriMarket.BLL.Dtos;
-using AgriMarket.BLL.Dtos.Messaging;
+using AgriMarket.Shared.Dtos;
+using AgriMarket.Modules.Messaging.Dtos;
 using AgriMarket.Web.Mappers;
 using FluentAssertions;
 using Xunit;

@@ -1,39 +1,48 @@
-using AgriMarket.BLL.Services;
-using AgriMarket.DAL;
-using AgriMarket.DAL.Repositories;
-using AgriMarket.Domain.Entities;
+using AgriMarket.Modules.Bookings.Entities;
+using AgriMarket.Modules.Bookings.Persistence;
+using AgriMarket.Modules.Bookings.Services;
+using AgriMarket.Modules.Marketplace.Contracts;
+using AgriMarket.Modules.Marketplace.Entities;
+using AgriMarket.Modules.Marketplace.Persistence;
+using AgriMarket.Modules.Marketplace.Services;
+using AgriMarket.Shared.Persistence;
+using MediatR;
 using Microsoft.Extensions.Logging.Abstractions;
-using EquipmentEntity = AgriMarket.Domain.Entities.Equipment;
+using Moq;
+using BookingsRepo = AgriMarket.Modules.Bookings.Persistence.EfRepository<AgriMarket.Modules.Bookings.Entities.Review>;
+using BookingsUow = AgriMarket.Modules.Bookings.Persistence.EfUnitOfWork;
+using MarketplaceUow = AgriMarket.Modules.Marketplace.Persistence.EfUnitOfWork;
 
 namespace AgriMarket.Tests.Helpers;
 
-public static class TestServiceFactory
+internal static class TestServiceFactory
 {
-    public static ReviewService CreateReviewService(AppDbContext db) =>
-        new(new EfRepository<Review>(db),
-            new EfRepository<UserProfile>(db),
+    public static ReviewService CreateReviewService(BookingsDbContext db) =>
+        new(new AgriMarket.Modules.Bookings.Persistence.EfRepository<Review>(db),
             new EfBookingRepository(db),
-            new EfUnitOfWork(db),
+            new AgriMarket.Modules.Bookings.Persistence.EfUnitOfWork(db),
             new EfQueryMaterializer(),
-            NullLogger<ReviewService>.Instance);
+            Mock.Of<ICatalogModule>());
 
-    public static EquipmentService CreateEquipmentService(AppDbContext db) =>
-        new(new EfRepository<EquipmentEntity>(db),
-            new EfRepository<ServiceListing>(db),
-            new EfRepository<ServiceListingEquipment>(db),
-            new EfUnitOfWork(db),
+    public static EquipmentService CreateEquipmentService(MarketplaceDbContext db) =>
+        new(new AgriMarket.Modules.Marketplace.Persistence.EfRepository<Equipment>(db),
+            new AgriMarket.Modules.Marketplace.Persistence.EfRepository<ServiceListing>(db),
+            new AgriMarket.Modules.Marketplace.Persistence.EfRepository<ServiceListingEquipment>(db),
+            new AgriMarket.Modules.Marketplace.Persistence.EfUnitOfWork(db),
             new EfQueryMaterializer(),
             NullLogger<EquipmentService>.Instance);
 
-    public static ClientPaymentService CreateClientPaymentService(AppDbContext db) =>
+    public static ClientPaymentService CreateClientPaymentService(BookingsDbContext db) =>
         new(new EfBookingRepository(db),
-            new EfRepository<Payment>(db),
-            new EfUnitOfWork(db),
-            new EfQueryMaterializer());
+            new AgriMarket.Modules.Bookings.Persistence.EfRepository<Payment>(db),
+            new AgriMarket.Modules.Bookings.Persistence.EfUnitOfWork(db),
+            new EfQueryMaterializer(),
+            Mock.Of<ICatalogModule>(),
+            Mock.Of<IMediator>());
 
-    public static PaymentService CreatePaymentService(AppDbContext db) =>
+    public static PaymentService CreatePaymentService(BookingsDbContext db) =>
         new(new EfPaymentRepository(db),
-            new EfUnitOfWork(db),
+            new AgriMarket.Modules.Bookings.Persistence.EfUnitOfWork(db),
             new EfQueryMaterializer(),
             NullLogger<PaymentService>.Instance);
 }

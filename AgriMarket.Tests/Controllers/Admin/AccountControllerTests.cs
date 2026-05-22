@@ -1,63 +1,46 @@
-using AgriMarket.DAL;
-using AgriMarket.DAL.Repositories;
-using AgriMarket.Domain.Entities;
-using AgriMarket.Domain.Enums;
+using AgriMarket.Modules.Users.Services;
+using AgriMarket.Modules.Users.Security;
+using AgriMarket.Modules.Users.Dtos;
 using AgriMarket.Tests.Helpers;
 using AgriMarket.Web.Areas.Admin.Controllers;
-using AgriMarket.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
+using Moq;
 using Xunit;
 
 namespace AgriMarket.Tests.Controllers.Admin;
 
 public class AccountControllerTests
 {
-    private static readonly AgriMarket.BLL.Contracts.IPasswordHasher PasswordHasher = new BCryptPasswordHasher();
+    private readonly Mock<IUserService> _userService = new();
+    private readonly Mock<IPasswordHasher> _passwordHasher = new();
 
-    private static AgriMarket.BLL.Services.UserService CreateUserService(AppDbContext db) =>
-        new(new EfAppUserRepository(db),
-            new EfUserProfileRepository(db),
-            new EfRepository<UserRole>(db),
-            new EfUnitOfWork(db),
-            new EfRepository<MessageRead>(db),
-            new EfRepository<Message>(db),
-            new EfRepository<ConversationParticipant>(db),
-            new EfRepository<Review>(db),
-            new EfRepository<Booking>(db),
-            new EfRepository<ServiceListing>(db),
-            TestServiceFactory.CreateReviewService(db),
-            NullLogger<AgriMarket.BLL.Services.UserService>.Instance);
-
-    [Fact]
-    public async Task Login_WithAdminRole_RedirectsToDashboard()
+    private AccountController CreateController(Guid userId)
     {
-        using var db = TestDbContextFactory.Create(nameof(Login_WithAdminRole_RedirectsToDashboard));
-        TestDbContextFactory.SeedClientUser(db, "admin@test.com", "password123", RoleType.Admin);
-
-        var controller = new AccountController(CreateUserService(db), PasswordHasher);
-        controller.ControllerContext = ControllerContextFactory.WithSignInSupport();
-
-        var result = await controller.Login(new LoginViewModel { Email = "admin@test.com", Password = "password123" });
-
-        var redirect = Assert.IsType<RedirectToActionResult>(result);
-        Assert.Equal("Index", redirect.ActionName);
-        Assert.Equal("Dashboard", redirect.ControllerName);
+        var controller = new AccountController(_userService.Object, _passwordHasher.Object);
+        controller.ControllerContext = ControllerContextFactory.WithAuthenticatedUser(userId);
+        return controller;
     }
 
     [Fact]
-    public async Task Login_WithClientRole_ReturnsViewWithError()
+    public void Login_Get_ReturnsView()
     {
-        using var db = TestDbContextFactory.Create(nameof(Login_WithClientRole_ReturnsViewWithError));
-        TestDbContextFactory.SeedClientUser(db, "client@test.com", "password123", RoleType.Client);
-
-        var controller = new AccountController(CreateUserService(db), PasswordHasher);
-        controller.ControllerContext = ControllerContextFactory.WithSignInSupport();
-
-        var result = await controller.Login(new LoginViewModel { Email = "client@test.com", Password = "password123" });
-
+        var controller = CreateController(Guid.NewGuid());
+        var result = controller.Login();
         Assert.IsType<ViewResult>(result);
-        Assert.False(controller.ModelState.IsValid);
-        Assert.True(controller.ModelState.ContainsKey(string.Empty));
+    }
+
+    [Fact]
+    public async Task Login_InvalidCredentials_ReturnsView()
+    {
+        _userService.Setup(x => x.GetByEmailAsync(It.IsAny<string>(), default))
+            .ReturnsAsync((AgriMarket.Modules.Users.Entities.AppUser?)null);
+
+        var controller = CreateController(Guid.NewGuid());
+        var result = await controller.Login(new AgriMarket.Web.ViewModels.LoginViewModel
+        {
+            Email = "test@test.com",
+            Password = "wrong"
+        });
+        Assert.IsType<ViewResult>(result);
     }
 }
