@@ -43,4 +43,12 @@ public sealed class MarketplaceModule : IModule
         // registered as an application part in the bootstrapper. No
         // module-specific endpoints to map.
     }
+
+    public async Task InitializeDatabaseAsync(
+        IServiceProvider scopedServices,
+        CancellationToken cancellationToken = default)
+    {
+        var context = scopedServices.GetRequiredService<MarketplaceDbContext>();
+        await context.Database.MigrateAsync(cancellationToken);
+    }
 }

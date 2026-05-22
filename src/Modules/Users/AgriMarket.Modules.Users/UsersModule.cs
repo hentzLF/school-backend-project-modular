@@ -1,5 +1,6 @@
 using AgriMarket.Modules.Users.Contracts;
 using AgriMarket.Modules.Users.Persistence;
+using AgriMarket.Modules.Users.Persistence.Seeding;
 using AgriMarket.Modules.Users.Security;
 using AgriMarket.Modules.Users.Services;
 using AgriMarket.Shared.Modules;
@@ -45,5 +46,16 @@ public sealed class UsersModule : IModule
         // the module assembly registered as an MVC application part in the
         // bootstrapper and mapped by the bootstrapper's global MapControllers().
         // There are no module-specific (minimal-API or hub) endpoints to map.
+    }
+
+    public async Task InitializeDatabaseAsync(
+        IServiceProvider scopedServices,
+        CancellationToken cancellationToken = default)
+    {
+        var context = scopedServices.GetRequiredService<UsersDbContext>();
+        await context.Database.MigrateAsync(cancellationToken);
+
+        var passwordHasher = scopedServices.GetRequiredService<IPasswordHasher>();
+        await UsersDbSeeder.SeedAsync(context, passwordHasher, cancellationToken);
     }
 }

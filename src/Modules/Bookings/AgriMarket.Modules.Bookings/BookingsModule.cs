@@ -45,4 +45,12 @@ public sealed class BookingsModule : IModule
         // registered as an application part in the bootstrapper. No
         // module-specific endpoints to map.
     }
+
+    public async Task InitializeDatabaseAsync(
+        IServiceProvider scopedServices,
+        CancellationToken cancellationToken = default)
+    {
+        var context = scopedServices.GetRequiredService<BookingsDbContext>();
+        await context.Database.MigrateAsync(cancellationToken);
+    }
 }

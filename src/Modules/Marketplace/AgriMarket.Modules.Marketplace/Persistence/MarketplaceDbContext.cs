@@ -101,6 +101,7 @@ internal sealed class MarketplaceDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
 
         // Seeding
+        modelBuilder.Entity<ServiceCategory>().HasData(ServiceCategorySeedData.GetAll());
         modelBuilder.Entity<County>().HasData(CountySeedData.GetAll());
         modelBuilder.Entity<Municipality>().HasData(MunicipalitySeedData.GetAll());
     }

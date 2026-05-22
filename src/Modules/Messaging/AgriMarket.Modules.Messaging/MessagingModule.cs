@@ -40,4 +40,12 @@ public sealed class MessagingModule : IModule
     {
         // The SignalR MessageHub is mapped by the bootstrapper in Phase 6.
     }
+
+    public async Task InitializeDatabaseAsync(
+        IServiceProvider scopedServices,
+        CancellationToken cancellationToken = default)
+    {
+        var context = scopedServices.GetRequiredService<MessagingDbContext>();
+        await context.Database.MigrateAsync(cancellationToken);
+    }
 }
