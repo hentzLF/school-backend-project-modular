@@ -31,6 +31,11 @@ public sealed class BookingsModule : IModule
         services.AddScoped<IBookingRepository, EfBookingRepository>();
         services.AddScoped<IPaymentRepository, EfPaymentRepository>();
         services.AddScoped<IPaymentService, PaymentService>();
+        services.AddScoped<IBookingService, BookingService>();
+        services.AddScoped<IClientPaymentService, ClientPaymentService>();
+        services.AddScoped<IReviewService, ReviewService>();
+        services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<IProviderDashboardService, ProviderDashboardService>();
         services.AddScoped<IBookingsModule, BookingsModuleApi>();
     }
 

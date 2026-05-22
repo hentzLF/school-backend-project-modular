@@ -1,13 +1,33 @@
 using AgriMarket.Modules.Marketplace.Contracts;
 using AgriMarket.Modules.Marketplace.Entities;
+using AgriMarket.Shared.Exceptions;
 using AgriMarket.Shared.Persistence;
 
 namespace AgriMarket.Modules.Marketplace;
 
 internal sealed class CatalogModuleApi(
     IRepository<ServiceListing> listings,
-    IRepository<Availability> availabilities) : ICatalogModule
+    IRepository<Availability> availabilities,
+    IUnitOfWork uow) : ICatalogModule
 {
+    public async Task<bool> TryReserveAvailabilityAsync(Guid availabilityId, CancellationToken ct = default)
+    {
+        var availability = await availabilities.GetByIdAsync(availabilityId, ct);
+        if (availability is null || availability.IsBooked)
+            return false;
+
+        availability.IsBooked = true;
+        try
+        {
+            await uow.SaveChangesAsync(ct);
+            return true;
+        }
+        catch (ConcurrencyException)
+        {
+            return false;
+        }
+    }
+
     public async Task<ListingSummaryDto?> GetListingSummaryAsync(Guid listingId, CancellationToken ct = default)
     {
         var l = await listings.GetByIdAsync(listingId, ct);

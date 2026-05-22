@@ -17,4 +17,10 @@ public interface ICatalogModule
     Task<IReadOnlyCollection<ListingSummaryDto>> GetListingsByProviderAsync(
         Guid providerProfileId,
         CancellationToken ct = default);
+
+    /// <summary>
+    /// Atomically marks an availability slot as booked. Returns false when the
+    /// slot does not exist or was already booked (lost a concurrency race).
+    /// </summary>
+    Task<bool> TryReserveAvailabilityAsync(Guid availabilityId, CancellationToken ct = default);
 }
