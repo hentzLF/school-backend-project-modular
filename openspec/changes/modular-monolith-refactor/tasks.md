@@ -79,11 +79,11 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 9. Marketplace repositories and services
 
-- [ ] 9.1 Move `EfListingRepository` and `EfAvailabilityRepository` into the module as `internal`
-- [ ] 9.2 Move `CategoryService`, `ListingService`, `EquipmentService`, `LocationLookupService` (interfaces + DTOs) into the module
-- [ ] 9.3 Implement `ICatalogModule` as an internal adapter over the module's services
-- [ ] 9.4 Verify build
-- [ ] 9.5 Git commit: `feat: add Marketplace module repositories and services`
+- [x] 9.1 Move `EfListingRepository` and `EfAvailabilityRepository` into the module as `internal` (cross-module `.Include(l => l.UserProfile)` removed from the listing repo)
+- [~] 9.2 Move `CategoryService`, `EquipmentService`, `LocationLookupService` (interfaces + Equipment/Locations DTOs) into the module. `ListingService` DEFERRED to Phase 6 — cross-module deps on `IRepository<UserProfile>`, `IRepository<Booking>`, `IReviewService`, `BookingStatus`
+- [x] 9.3 Implement `ICatalogModule` as the internal `CatalogModuleApi` adapter
+- [x] 9.4 Verify build
+- [x] 9.5 Git commit: `feat: add Marketplace module repositories and services`
 
 ## 10. Marketplace module registration
 
