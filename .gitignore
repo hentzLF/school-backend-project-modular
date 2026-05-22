@@ -484,3 +484,7 @@ $RECYCLE.BIN/
 
 # Claude worktrees
 .claude/worktrees/
+
+# Claude local settings (personal, not shared)
+.claude/settings.local.json
+CLAUDE.local.md
