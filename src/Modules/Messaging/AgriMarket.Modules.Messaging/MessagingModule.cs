@@ -1,4 +1,6 @@
+using AgriMarket.Modules.Messaging.Contracts;
 using AgriMarket.Modules.Messaging.Persistence;
+using AgriMarket.Modules.Messaging.Services;
 using AgriMarket.Shared.Modules;
 using AgriMarket.Shared.Persistence;
 using Microsoft.AspNetCore.Routing;
@@ -26,10 +28,12 @@ public sealed class MessagingModule : IModule
         services.AddScoped<IUnitOfWork, EfUnitOfWork>();
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         services.AddScoped<IQueryMaterializer, EfQueryMaterializer>();
+        services.AddScoped<IConversationRepository, EfConversationRepository>();
+        services.AddScoped<IMessagingService, MessagingService>();
+        services.AddScoped<IMessagingModule, MessagingModuleApi>();
 
-        // MessagingService, EfConversationRepository, the SignalR MessageHub and
-        // the IMessagingModule adapter are added in Phase 6 — they require
-        // cross-module participant-name resolution via IUsersModule.
+        // The SignalR-backed IMessageNotifier implementation is registered by
+        // the bootstrapper (it owns the SignalR hub).
     }
 
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
