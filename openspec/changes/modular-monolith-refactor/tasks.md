@@ -96,19 +96,19 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 11. Bookings.Contracts project
 
-- [ ] 11.1 Create `AgriMarket.Modules.Bookings.Contracts` class library
-- [ ] 11.2 Define `IBookingsModule` interface
-- [ ] 11.3 Define `BookingConfirmedEvent` integration event and public DTO records
-- [ ] 11.4 Add to `AgriMarket.slnx`; verify build
-- [ ] 11.5 Git commit: `feat: add Bookings module contracts project`
+- [x] 11.1 Create `AgriMarket.Modules.Bookings.Contracts` class library (references `AgriMarket.Shared` for the `IntegrationEvent` base)
+- [x] 11.2 Define `IBookingsModule` interface (`GetBookingAsync`)
+- [x] 11.3 Define `BookingConfirmedEvent` integration event and the `BookingSummaryDto` record
+- [x] 11.4 Add to `AgriMarket.slnx`; verify build
+- [x] 11.5 Git commit: `feat: add Bookings module contracts project`
 
 ## 12. Bookings module core
 
-- [ ] 12.1 Create `AgriMarket.Modules.Bookings` class library referencing `AgriMarket.Shared`, its `.Contracts`, `Users.Contracts`, `Marketplace.Contracts`
-- [ ] 12.2 Copy entities `Booking`, `Payment`, `Review` as `internal`; replace cross-module navs with `Guid` ids
-- [ ] 12.3 Create `BookingsDbContext` (`HasDefaultSchema("bookings")`) with relationship/index config
-- [ ] 12.4 Add `InternalsVisibleTo` for `AgriMarket.Tests`; verify build
-- [ ] 12.5 Git commit: `feat: add Bookings module entities and BookingsDbContext`
+- [x] 12.1 Create `AgriMarket.Modules.Bookings` class library referencing `AgriMarket.Shared` and its `.Contracts` (Users/Marketplace `.Contracts` added in Phase 6 with the services)
+- [x] 12.2 Copy entities `Booking`, `Payment`, `Review` as `internal sealed`; removed 5 cross-module navs (Booking→ServiceListing/ClientProfile/Availability, Review→Reviewer/ReviewedProfile)
+- [x] 12.3 Create `BookingsDbContext` (`HasDefaultSchema("bookings")`) with the in-module relationship/index config
+- [~] 12.4 `InternalsVisibleTo` for `AgriMarket.Tests` — deferred to block 22; build verified
+- [x] 12.5 Git commit: `feat: add Bookings module entities and BookingsDbContext`
 
 ## 13. Bookings repositories and services
 
