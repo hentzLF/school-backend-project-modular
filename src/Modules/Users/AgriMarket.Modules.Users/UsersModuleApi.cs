@@ -4,8 +4,15 @@ using AgriMarket.Modules.Users.Persistence;
 
 namespace AgriMarket.Modules.Users;
 
-internal sealed class UsersModuleApi(IUserProfileRepository profiles) : IUsersModule
+internal sealed class UsersModuleApi(
+    IUserProfileRepository profiles,
+    IAppUserRepository appUsers) : IUsersModule
 {
+    public Task<int> CountUsersAsync(DateTime? registeredSince = null, CancellationToken ct = default)
+        => registeredSince is null
+            ? appUsers.CountAsync(_ => true, ct)
+            : appUsers.CountAsync(u => u.CreatedAt >= registeredSince.Value, ct);
+
     public async Task<UserProfileDto?> GetProfileAsync(Guid profileId, CancellationToken ct = default)
     {
         var profile = await profiles.GetByIdAsync(profileId, ct);
