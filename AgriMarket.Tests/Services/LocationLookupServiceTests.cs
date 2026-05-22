@@ -17,13 +17,13 @@ public class LocationLookupServiceTests
     }
 
     [Fact]
-    public async Task GetAllCountiesAsync_EmptyDb_ReturnsEmpty()
+    public async Task GetAllCountiesAsync_ReturnsSeededCounties()
     {
         var db = TestDbContextFactory.CreateMarketplaceDb();
         var service = CreateService(db);
 
         var result = await service.GetAllCountiesAsync();
 
-        result.Should().BeEmpty();
+        result.Should().HaveCount(15);
     }
 }

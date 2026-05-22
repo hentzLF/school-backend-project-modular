@@ -25,14 +25,15 @@ public class ReviewsControllerTests
     }
 
     [Fact]
-    public async Task ForProvider_UserNotFound_ReturnsUnauthorized()
+    public async Task ForProvider_UserNotFound_ReturnsNotFound()
     {
         var userId = Guid.NewGuid();
-        _userService.Setup(x => x.GetProfileByUserIdAsync(userId, default))
+        var profileId = Guid.NewGuid();
+        _userService.Setup(x => x.GetProfileByIdAsync(profileId, null, false, default))
             .ReturnsAsync((UserProfileDto?)null);
 
         var controller = CreateController(userId);
-        var result = await controller.ForProvider(Guid.NewGuid());
-        Assert.IsType<UnauthorizedResult>(result);
+        var result = await controller.ForProvider(profileId);
+        Assert.IsType<NotFoundResult>(result);
     }
 }

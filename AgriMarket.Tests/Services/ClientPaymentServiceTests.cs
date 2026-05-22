@@ -2,7 +2,6 @@ using AgriMarket.Modules.Bookings.Dtos.Payments;
 using AgriMarket.Modules.Bookings.Entities;
 using AgriMarket.Modules.Bookings.Enums;
 using AgriMarket.Modules.Bookings.Persistence;
-using AgriMarket.Shared.Exceptions;
 using AgriMarket.Tests.Helpers;
 using FluentAssertions;
 using Xunit;
@@ -20,6 +19,6 @@ public class ClientPaymentServiceTests
         var act = () => service.PayAsync(Guid.NewGuid(),
             new PayRequest(Guid.NewGuid(), PaymentMethod.Card));
 
-        await act.Should().ThrowAsync<BusinessRuleException>();
+        await act.Should().ThrowAsync<KeyNotFoundException>();
     }
 }

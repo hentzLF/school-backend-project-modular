@@ -2,7 +2,7 @@ services:
   agrimarket-api:
     build:
       context: .
-      dockerfile: AgriMarket.Api/Dockerfile
+      dockerfile: src/Bootstrapper/AgriMarket.Api/Dockerfile
     restart: unless-stopped
     ports:
       - "${AGRI_API_PORT:-5047}:8080"

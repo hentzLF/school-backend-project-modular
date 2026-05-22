@@ -4,9 +4,15 @@ WORKDIR /src
 COPY AgriMarket.slnx .
 COPY Directory.Build.props .
 COPY AgriMarket.Web/AgriMarket.Web.csproj AgriMarket.Web/
-COPY AgriMarket.BLL/AgriMarket.BLL.csproj AgriMarket.BLL/
-COPY AgriMarket.DAL/AgriMarket.DAL.csproj AgriMarket.DAL/
-COPY AgriMarket.Domain/AgriMarket.Domain.csproj AgriMarket.Domain/
+COPY src/Shared/AgriMarket.Shared/AgriMarket.Shared.csproj src/Shared/AgriMarket.Shared/
+COPY src/Modules/Users/AgriMarket.Modules.Users/AgriMarket.Modules.Users.csproj src/Modules/Users/AgriMarket.Modules.Users/
+COPY src/Modules/Users/AgriMarket.Modules.Users.Contracts/AgriMarket.Modules.Users.Contracts.csproj src/Modules/Users/AgriMarket.Modules.Users.Contracts/
+COPY src/Modules/Marketplace/AgriMarket.Modules.Marketplace/AgriMarket.Modules.Marketplace.csproj src/Modules/Marketplace/AgriMarket.Modules.Marketplace/
+COPY src/Modules/Marketplace/AgriMarket.Modules.Marketplace.Contracts/AgriMarket.Modules.Marketplace.Contracts.csproj src/Modules/Marketplace/AgriMarket.Modules.Marketplace.Contracts/
+COPY src/Modules/Bookings/AgriMarket.Modules.Bookings/AgriMarket.Modules.Bookings.csproj src/Modules/Bookings/AgriMarket.Modules.Bookings/
+COPY src/Modules/Bookings/AgriMarket.Modules.Bookings.Contracts/AgriMarket.Modules.Bookings.Contracts.csproj src/Modules/Bookings/AgriMarket.Modules.Bookings.Contracts/
+COPY src/Modules/Messaging/AgriMarket.Modules.Messaging/AgriMarket.Modules.Messaging.csproj src/Modules/Messaging/AgriMarket.Modules.Messaging/
+COPY src/Modules/Messaging/AgriMarket.Modules.Messaging.Contracts/AgriMarket.Modules.Messaging.Contracts.csproj src/Modules/Messaging/AgriMarket.Modules.Messaging.Contracts/
 COPY AgriMarket.Resources/AgriMarket.Resources.csproj AgriMarket.Resources/
 
 RUN dotnet restore AgriMarket.Web/AgriMarket.Web.csproj

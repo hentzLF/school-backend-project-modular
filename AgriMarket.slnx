@@ -1,9 +1,6 @@
 <Solution>
   <Project Path="src/Bootstrapper/AgriMarket.Api/AgriMarket.Api.csproj" />
   <Project Path="src/Shared/AgriMarket.Shared/AgriMarket.Shared.csproj" />
-  <Project Path="AgriMarket.BLL/AgriMarket.BLL.csproj" />
-  <Project Path="AgriMarket.DAL/AgriMarket.DAL.csproj" />
-  <Project Path="AgriMarket.Domain/AgriMarket.Domain.csproj" />
   <Project Path="AgriMarket.Resources/AgriMarket.Resources.csproj" />
   <Project Path="src/Modules/Users/AgriMarket.Modules.Users.Contracts/AgriMarket.Modules.Users.Contracts.csproj" />
   <Project Path="src/Modules/Users/AgriMarket.Modules.Users/AgriMarket.Modules.Users.csproj" />
@@ -14,4 +11,5 @@
   <Project Path="src/Modules/Messaging/AgriMarket.Modules.Messaging.Contracts/AgriMarket.Modules.Messaging.Contracts.csproj" />
   <Project Path="src/Modules/Messaging/AgriMarket.Modules.Messaging/AgriMarket.Modules.Messaging.csproj" />
   <Project Path="AgriMarket.Web/AgriMarket.Web.csproj" />
+  <Project Path="AgriMarket.Tests/AgriMarket.Tests.csproj" />
 </Solution>

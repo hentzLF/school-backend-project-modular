@@ -13,6 +13,6 @@ public class MessageHubTests
     {
         var conversationId = Guid.Parse("12345678-1234-1234-1234-123456789012");
         var result = MessageHub.GroupName(conversationId);
-        Assert.Equal("conversation_12345678-1234-1234-1234-123456789012", result);
+        Assert.Equal("conversation-12345678-1234-1234-1234-123456789012", result);
     }
 }
