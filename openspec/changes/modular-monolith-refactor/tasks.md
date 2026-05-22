@@ -27,20 +27,20 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 3. Users.Contracts project
 
-- [ ] 3.1 Create `AgriMarket.Modules.Users.Contracts` class library at `src/Modules/Users/AgriMarket.Modules.Users.Contracts`
-- [ ] 3.2 Define `IUsersModule` interface (`GetUserProfileAsync`, `GetUserSummaryAsync`, batch lookups by id set)
-- [ ] 3.3 Define public DTO records (`UserSummaryDto`, `UserProfileDto`)
-- [ ] 3.4 Add to `AgriMarket.slnx`; verify build
-- [ ] 3.5 Git commit: `feat: add Users module contracts project`
+- [x] 3.1 Create `AgriMarket.Modules.Users.Contracts` class library at `src/Modules/Users/AgriMarket.Modules.Users.Contracts`
+- [x] 3.2 Define `IUsersModule` interface (`GetProfileAsync`, `GetProfilesAsync` batch lookup)
+- [x] 3.3 Define public DTO records (`UserProfileDto`)
+- [x] 3.4 Add to `AgriMarket.slnx`; verify build
+- [x] 3.5 Git commit: `feat: add Users module contracts project`
 
 ## 4. Users module core project
 
-- [ ] 4.1 Create `AgriMarket.Modules.Users` class library referencing `AgriMarket.Shared` and `AgriMarket.Modules.Users.Contracts`
-- [ ] 4.2 Copy entities `AppUser`, `UserProfile`, `UserRole`, `RefreshToken` into the module as `internal`; replace cross-module navigation properties with loose `Guid` id properties
-- [ ] 4.3 Create `UsersDbContext` (`HasDefaultSchema("users")`) with the relationship/index config for these entities from the old `AppDbContext`
-- [ ] 4.4 Add `InternalsVisibleTo` for `AgriMarket.Tests`
-- [ ] 4.5 Verify build
-- [ ] 4.6 Git commit: `feat: add Users module entities and UsersDbContext`
+- [x] 4.1 Create `AgriMarket.Modules.Users` class library referencing `AgriMarket.Shared` and `AgriMarket.Modules.Users.Contracts`
+- [x] 4.2 Copy entities `AppUser`, `UserProfile`, `UserRole`, `RefreshToken` into the module as `internal`; removed UserProfile's 7 cross-module navigation collections
+- [x] 4.3 Create `UsersDbContext` (`HasDefaultSchema("users")`) with the relationship/index config for these entities from the old `AppDbContext`
+- [~] 4.4 `InternalsVisibleTo` for `AgriMarket.Tests` — deferred to block 22 (test rewiring)
+- [x] 4.5 Verify build
+- [x] 4.6 Git commit: `feat: add Users module entities and UsersDbContext`
 
 ## 5. Users module repositories and services
 
