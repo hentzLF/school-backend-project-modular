@@ -120,10 +120,10 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 14. Bookings module registration
 
-- [ ] 14.1 Implement `BookingsModule : IModule`
-- [ ] 14.2 Move `BookingsController`, `PaymentsController`, `ReviewsController`, `ProviderDashboardController`, `AdminBookingsController`, `AdminPaymentsController`, `AdminDashboardController` into the module
-- [ ] 14.3 Verify build
-- [ ] 14.4 Git commit: `feat: add Bookings module IModule registration and controllers`
+- [x] 14.1 Implement `BookingsModule : IModule` — wires `BookingsDbContext` (bookings-schema migrations history), repositories, query materializer, `PaymentService`, `IBookingsModule`
+- [~] 14.2 Move Bookings controllers — DEFERRED to Phase 6 (bootstrapper MVC wiring; most also block on the deferred Booking/Review/Dashboard services)
+- [x] 14.3 Verify build
+- [x] 14.4 Git commit: `feat: add Bookings module IModule registration`
 
 ## Phase 5 — Messaging Module
 
