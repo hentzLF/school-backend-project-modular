@@ -53,10 +53,10 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 6. Users module registration
 
-- [ ] 6.1 Implement `UsersModule : IModule` — `RegisterServices` wires `UsersDbContext`, repositories, services, `IUsersModule`; `MapEndpoints` maps Users controllers
-- [ ] 6.2 Move `AuthController` and `UsersController` into the Users module
-- [ ] 6.3 Verify build
-- [ ] 6.4 Git commit: `feat: add Users module IModule registration and controllers`
+- [x] 6.1 Implement `UsersModule : IModule` — `RegisterServices` wires `UsersDbContext` (schema-scoped migrations history), repositories, services, `IUsersModule`
+- [~] 6.2 Move `AuthController`/`UsersController` — DEFERRED to Phase 6 (block 19): controller relocation is coupled to the bootstrapper's MVC application-part + API-versioning wiring. `UsersController` additionally blocks on the deferred `UserService`
+- [x] 6.3 Verify build
+- [x] 6.4 Git commit: `feat: add Users module IModule registration`
 
 ## Phase 3 — Marketplace Module
 
