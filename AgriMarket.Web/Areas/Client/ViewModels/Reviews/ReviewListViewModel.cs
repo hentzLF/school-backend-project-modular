@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 
-public class ReviewListViewModel
+internal class ReviewListViewModel
 {
     public IEnumerable<ReviewViewModel> Reviews { get; set; } = [];
     public Guid ProfileId { get; set; }

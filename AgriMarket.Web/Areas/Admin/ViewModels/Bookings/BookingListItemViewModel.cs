@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class BookingListItemViewModel
+internal class BookingListItemViewModel
 {
     public Guid Id { get; set; }
     public string ClientName { get; set; } = default!;

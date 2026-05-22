@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class DashboardViewModel
+internal class DashboardViewModel
 {
     // Users
     public int TotalUsers { get; set; }
@@ -31,7 +31,7 @@ public class DashboardViewModel
     public IEnumerable<RecentBookingViewModel> RecentBookings { get; set; } = [];
 }
 
-public class RecentBookingViewModel
+internal class RecentBookingViewModel
 {
     public Guid Id { get; set; }
     public string ClientName { get; set; } = default!;

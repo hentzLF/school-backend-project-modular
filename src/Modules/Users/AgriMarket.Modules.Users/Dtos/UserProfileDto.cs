@@ -7,7 +7,7 @@ namespace AgriMarket.Modules.Users.Dtos;
 /// the Users controllers. Distinct from the lightweight cross-module
 /// <see cref="Contracts.UserProfileDto"/>.
 /// </summary>
-public sealed class UserProfileDto
+internal sealed class UserProfileDto
 {
     public Guid Id { get; init; }
     public string FirstName { get; init; } = default!;

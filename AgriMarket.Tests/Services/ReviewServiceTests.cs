@@ -138,16 +138,16 @@ public class ReviewServiceTests
     }
 
     [Theory]
-    [InlineData(BookingStatus.Pending)]
-    [InlineData(BookingStatus.Confirmed)]
-    [InlineData(BookingStatus.InProgress)]
-    [InlineData(BookingStatus.Cancelled)]
-    [InlineData(BookingStatus.Disputed)]
-    [InlineData(BookingStatus.AwaitingPayment)]
-    public async Task CreateAsync_BookingNotCompleted_ThrowsBusinessRuleException(BookingStatus status)
+    [InlineData((int)BookingStatus.Pending)]
+    [InlineData((int)BookingStatus.Confirmed)]
+    [InlineData((int)BookingStatus.InProgress)]
+    [InlineData((int)BookingStatus.Cancelled)]
+    [InlineData((int)BookingStatus.Disputed)]
+    [InlineData((int)BookingStatus.AwaitingPayment)]
+    public async Task CreateAsync_BookingNotCompleted_ThrowsBusinessRuleException(int statusValue)
     {
         var booking = CreateCompletedBooking();
-        booking.Status = status;
+        booking.Status = (BookingStatus)statusValue;
         SetupBookingExists(booking);
 
         var ex = await Assert.ThrowsAsync<BusinessRuleException>(

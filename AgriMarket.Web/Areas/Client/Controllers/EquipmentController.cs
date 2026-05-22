@@ -12,7 +12,7 @@ namespace AgriMarket.Web.Areas.Client.Controllers;
 
 [Area("Client")]
 [Authorize(Policy = "ClientOnly")]
-public class EquipmentController(
+internal class EquipmentController(
     IEquipmentService equipmentService,
     IListingService listingService,
     IUserService userService) : Controller

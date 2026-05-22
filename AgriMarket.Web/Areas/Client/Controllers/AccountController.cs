@@ -11,7 +11,7 @@ using System.Security.Claims;
 namespace AgriMarket.Web.Areas.Client.Controllers;
 
 [Area("Client")]
-public class AccountController(IUserService userService, IPasswordHasher passwordHasher) : Controller
+internal class AccountController(IUserService userService, IPasswordHasher passwordHasher) : Controller
 {
     [HttpGet]
     public IActionResult Login() => View(new LoginViewModel());

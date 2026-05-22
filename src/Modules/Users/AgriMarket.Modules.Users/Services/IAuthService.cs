@@ -2,7 +2,7 @@ using AgriMarket.Modules.Users.Dtos.Auth;
 
 namespace AgriMarket.Modules.Users.Services;
 
-public interface IAuthService
+internal interface IAuthService
 {
     Task RegisterAsync(RegisterRequest request, CancellationToken ct = default);
     Task<TokenResponse> LoginAsync(LoginRequest request, CancellationToken ct = default);

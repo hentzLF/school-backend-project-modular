@@ -19,9 +19,9 @@ internal sealed class ReviewsController(IReviewService reviewService) : ApiContr
 
     [HttpGet]
     [ProducesResponseType(typeof(PaginatedResponse<ReviewDto>), 200)]
-    public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = PaginationDefaults.DefaultPageSize)
     {
-        if (pageSize > 100) pageSize = 100;
+        if (pageSize > PaginationDefaults.MaxPageSize) pageSize = PaginationDefaults.MaxPageSize;
         if (page < 1) page = 1;
 
         var result = await _reviewService.GetAllAsync(page, pageSize);
@@ -139,9 +139,9 @@ internal sealed class ReviewsController(IReviewService reviewService) : ApiContr
 
     [HttpGet("profile/{profileId:guid}")]
     [ProducesResponseType(typeof(PaginatedResponse<ReviewDto>), 200)]
-    public async Task<IActionResult> GetByProfile(Guid profileId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    public async Task<IActionResult> GetByProfile(Guid profileId, [FromQuery] int page = 1, [FromQuery] int pageSize = PaginationDefaults.DefaultPageSize)
     {
-        if (pageSize > 100) pageSize = 100;
+        if (pageSize > PaginationDefaults.MaxPageSize) pageSize = PaginationDefaults.MaxPageSize;
         if (page < 1) page = 1;
 
         var result = await _reviewService.GetByProfileAsync(profileId, page, pageSize);

@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 
-public class ReviewViewModel
+internal class ReviewViewModel
 {
     public Guid Id { get; set; }
     public Guid BookingId { get; set; }

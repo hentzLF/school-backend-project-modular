@@ -3,7 +3,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 
 namespace AgriMarket.Web.Mappers;
 
-public static class ReviewViewModelMapper
+internal static class ReviewViewModelMapper
 {
     public static CreateReviewDto ToCreateDto(this CreateReviewViewModel vm)
     {

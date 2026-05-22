@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Payments;
 
-public class CheckoutSubmitViewModel
+internal class CheckoutSubmitViewModel
 {
     [Required]
     public Guid BookingId { get; set; }

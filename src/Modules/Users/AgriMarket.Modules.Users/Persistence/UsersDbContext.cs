@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Modules.Users.Persistence;
 
-public sealed class UsersDbContext : DbContext
+internal sealed class UsersDbContext : DbContext
 {
     public UsersDbContext(DbContextOptions<UsersDbContext> options)
         : base(options)

@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Enums;
 
-public enum EquipmentCondition
+internal enum EquipmentCondition
 {
     New = 1,
     Excellent = 2,

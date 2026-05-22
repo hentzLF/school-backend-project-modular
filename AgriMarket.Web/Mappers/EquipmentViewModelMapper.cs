@@ -3,7 +3,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.Equipment;
 
 namespace AgriMarket.Web.Mappers;
 
-public static class EquipmentViewModelMapper
+internal static class EquipmentViewModelMapper
 {
     public static EquipmentListItemViewModel ToListItem(this EquipmentDto dto)
     {

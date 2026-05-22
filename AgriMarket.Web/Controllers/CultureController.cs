@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AgriMarket.Web.Controllers;
 
-public class CultureController : Controller
+internal class CultureController : Controller
 {
     [HttpPost]
     public IActionResult SetCulture(string culture, string returnUrl)

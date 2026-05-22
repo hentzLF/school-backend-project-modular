@@ -2,7 +2,7 @@ using AgriMarket.Modules.Marketplace.Dtos.Listings;
 
 namespace AgriMarket.Modules.Marketplace.Services;
 
-public interface IListingService
+internal interface IListingService
 {
     Task<IEnumerable<ListingSummaryDto>> GetAllAsync(CancellationToken ct = default);
     Task<ListingDto?> GetByIdAsync(Guid id, CancellationToken ct = default);

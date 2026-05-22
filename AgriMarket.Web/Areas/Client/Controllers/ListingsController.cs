@@ -13,7 +13,7 @@ using System.Security.Claims;
 namespace AgriMarket.Web.Areas.Client.Controllers;
 
 [Area("Client")]
-public class ListingsController(
+internal class ListingsController(
     IListingService listingService,
     IBookingService bookingService,
     IReviewService reviewService,

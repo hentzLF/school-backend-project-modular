@@ -13,7 +13,7 @@ using System.Security.Claims;
 namespace AgriMarket.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
-public class AccountController(IUserService userService, IPasswordHasher passwordHasher) : Controller
+internal class AccountController(IUserService userService, IPasswordHasher passwordHasher) : Controller
 {
 
     [HttpGet]

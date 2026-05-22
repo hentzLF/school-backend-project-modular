@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Client.ViewModels.Messaging;
 
-public class ConversationDetailViewModel
+internal class ConversationDetailViewModel
 {
     public Guid ConversationId { get; set; }
     public string ParticipantName { get; set; } = default!;

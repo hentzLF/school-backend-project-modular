@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Modules.Users.Dtos.Auth;
 
-public sealed class RegisterRequest
+internal sealed class RegisterRequest
 {
     [Required]
     [EmailAddress]

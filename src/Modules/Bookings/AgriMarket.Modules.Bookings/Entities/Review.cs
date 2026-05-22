@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Bookings.Entities;
 
-public sealed class Review
+internal sealed class Review
 {
     public Guid Id { get; set; }
 

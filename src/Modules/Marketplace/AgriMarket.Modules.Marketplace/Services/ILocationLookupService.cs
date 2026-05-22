@@ -2,7 +2,7 @@ using AgriMarket.Modules.Marketplace.Dtos.Locations;
 
 namespace AgriMarket.Modules.Marketplace.Services;
 
-public interface ILocationLookupService
+internal interface ILocationLookupService
 {
     Task<IReadOnlyList<CountyDto>> GetAllCountiesAsync(CancellationToken ct = default);
     Task<IReadOnlyList<MunicipalityDto>> GetMunicipalitiesByCountyAsync(Guid countyId, CancellationToken ct = default);

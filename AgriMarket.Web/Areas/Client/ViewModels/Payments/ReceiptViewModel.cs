@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Client.ViewModels.Payments;
 
-public class ReceiptViewModel
+internal class ReceiptViewModel
 {
     public Guid PaymentId { get; set; }
     public Guid BookingId { get; set; }

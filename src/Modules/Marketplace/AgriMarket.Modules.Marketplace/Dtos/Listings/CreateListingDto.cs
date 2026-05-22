@@ -3,7 +3,7 @@ using AgriMarket.Modules.Marketplace.Dtos.Locations;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Listings;
 
-public sealed class CreateListingDto
+internal sealed class CreateListingDto
 {
     [Required]
     [MinLength(1)]

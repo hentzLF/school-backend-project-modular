@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Client.ViewModels.Messaging;
 
-public class MessageViewModel
+internal class MessageViewModel
 {
     public Guid Id { get; set; }
     public Guid SenderProfileId { get; set; }

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.ViewModels;
 
-public class LoginViewModel
+internal class LoginViewModel
 {
     [Required]
     [EmailAddress]

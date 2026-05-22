@@ -2,7 +2,7 @@ using AgriMarket.Modules.Users.Enums;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class UserListItemViewModel
+internal class UserListItemViewModel
 {
     public Guid Id { get; set; }
     public string Email { get; set; } = default!;

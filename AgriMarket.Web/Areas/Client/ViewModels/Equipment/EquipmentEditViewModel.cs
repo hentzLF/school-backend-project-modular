@@ -3,7 +3,7 @@ using AgriMarket.Modules.Marketplace.Enums;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Equipment;
 
-public class EquipmentEditViewModel
+internal class EquipmentEditViewModel
 {
     public Guid Id { get; set; }
 

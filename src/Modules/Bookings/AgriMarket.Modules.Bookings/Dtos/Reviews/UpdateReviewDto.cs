@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Modules.Bookings.Dtos.Reviews;
 
-public sealed class UpdateReviewDto
+internal sealed class UpdateReviewDto
 {
     public Guid Id { get; init; }
 

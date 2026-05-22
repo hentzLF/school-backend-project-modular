@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Bookings;
 
-public class CreateBookingViewModel
+internal class CreateBookingViewModel
 {
     [Required]
     public Guid ServiceListingId { get; set; }

@@ -9,7 +9,7 @@ namespace AgriMarket.Web.Areas.Client.Controllers;
 
 [Area("Client")]
 [Authorize(Policy = "ClientOnly")]
-public class ProfileController(IUserService userService) : Controller
+internal class ProfileController(IUserService userService) : Controller
 {
     public async Task<IActionResult> Index()
     {

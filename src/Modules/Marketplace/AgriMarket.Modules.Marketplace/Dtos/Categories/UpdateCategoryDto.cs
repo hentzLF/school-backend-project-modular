@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Categories;
 
-public sealed class UpdateCategoryDto
+internal sealed class UpdateCategoryDto
 {
     [Required]
     [MaxLength(100)]

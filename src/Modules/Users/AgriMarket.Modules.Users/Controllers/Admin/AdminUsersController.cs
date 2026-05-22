@@ -20,9 +20,9 @@ internal sealed class AdminUsersController(IUserService userService) : ApiContro
     [ProducesResponseType(typeof(PaginatedResponse<UserProfileDto>), 200)]
     [ProducesResponseType(401)]
     [ProducesResponseType(403)]
-    public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = PaginationDefaults.DefaultPageSize)
     {
-        if (pageSize > 100) pageSize = 100;
+        if (pageSize > PaginationDefaults.MaxPageSize) pageSize = PaginationDefaults.MaxPageSize;
         if (page < 1) page = 1;
 
         var result = await _userService.GetAllProfilesAsync(page, pageSize);

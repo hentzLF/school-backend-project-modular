@@ -3,7 +3,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class DisputeResolveViewModel
+internal class DisputeResolveViewModel
 {
     public Guid PaymentId { get; set; }
 

@@ -4,7 +4,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.Profile;
 
 namespace AgriMarket.Web.Mappers;
 
-public static class UserViewModelMapper
+internal static class UserViewModelMapper
 {
     public static ProfileViewModel ToProfileViewModel(this UserProfileDto dto, string role)
     {

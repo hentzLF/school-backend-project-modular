@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class CategoryEditViewModel
+internal class CategoryEditViewModel
 {
     public Guid Id { get; set; }
 

@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class ListingDetailViewModel
+internal class ListingDetailViewModel
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = default!;
@@ -16,14 +16,14 @@ public class ListingDetailViewModel
     public IEnumerable<ListingAvailabilityViewModel> Availabilities { get; set; } = [];
 }
 
-public class ListingEquipmentViewModel
+internal class ListingEquipmentViewModel
 {
     public string Name { get; set; } = default!;
     public string? Model { get; set; }
     public int? ManufactureYear { get; set; }
 }
 
-public class ListingAvailabilityViewModel
+internal class ListingAvailabilityViewModel
 {
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }

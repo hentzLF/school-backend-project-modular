@@ -3,7 +3,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Listings;
 
-public class ListingDetailsViewModel
+internal class ListingDetailsViewModel
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = default!;
@@ -18,7 +18,7 @@ public class ListingDetailsViewModel
     public List<EquipmentListItemViewModel> Equipment { get; set; } = [];
 }
 
-public class AvailabilityOptionViewModel
+internal class AvailabilityOptionViewModel
 {
     public Guid Id { get; set; }
     public DateTime StartTime { get; set; }

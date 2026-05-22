@@ -2,12 +2,12 @@ using AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Listings;
 
-public class ListingIndexViewModel
+internal class ListingIndexViewModel
 {
     public IEnumerable<ListingIndexItemViewModel> Listings { get; set; } = [];
 }
 
-public class ListingIndexItemViewModel
+internal class ListingIndexItemViewModel
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = default!;

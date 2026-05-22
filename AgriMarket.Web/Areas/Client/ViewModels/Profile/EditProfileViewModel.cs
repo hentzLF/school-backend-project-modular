@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Profile;
 
-public class EditProfileViewModel
+internal class EditProfileViewModel
 {
     [Required]
     [MaxLength(100)]

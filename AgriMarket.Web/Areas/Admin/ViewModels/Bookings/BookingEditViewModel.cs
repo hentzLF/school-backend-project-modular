@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class BookingEditViewModel
+internal class BookingEditViewModel
 {
     public Guid Id { get; set; }
 

@@ -2,7 +2,7 @@ using AgriMarket.Modules.Marketplace.Enums;
 
 namespace AgriMarket.Modules.Marketplace.Entities;
 
-public sealed class Equipment
+internal sealed class Equipment
 {
     public Guid Id { get; set; }
 

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class CategoryCreateViewModel
+internal class CategoryCreateViewModel
 {
     [Required]
     [StringLength(100)]

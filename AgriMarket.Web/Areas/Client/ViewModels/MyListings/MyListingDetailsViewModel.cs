@@ -2,7 +2,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.Equipment;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.MyListings
 {
-    public class MyListingDetailsViewModel
+    internal class MyListingDetailsViewModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = default!;

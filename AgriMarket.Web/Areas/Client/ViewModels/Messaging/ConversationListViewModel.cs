@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Client.ViewModels.Messaging;
 
-public class ConversationListViewModel
+internal class ConversationListViewModel
 {
     public List<ConversationListItemViewModel> Conversations { get; set; } = [];
     public int CurrentPage { get; set; }

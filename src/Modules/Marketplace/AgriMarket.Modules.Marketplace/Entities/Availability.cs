@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Marketplace.Entities;
 
-public sealed class Availability
+internal sealed class Availability
 {
     public Guid Id { get; set; }
 

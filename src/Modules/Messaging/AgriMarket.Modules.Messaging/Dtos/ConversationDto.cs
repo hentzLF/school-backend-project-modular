@@ -2,7 +2,7 @@ using AgriMarket.Shared.Dtos;
 
 namespace AgriMarket.Modules.Messaging.Dtos;
 
-public sealed class ConversationDto
+internal sealed class ConversationDto
 {
     public Guid Id { get; init; }
     public Guid? BookingId { get; init; }

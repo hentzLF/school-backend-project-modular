@@ -3,7 +3,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.Messaging;
 
 namespace AgriMarket.Web.Mappers;
 
-public static class MessagingViewModelMapper
+internal static class MessagingViewModelMapper
 {
     private const int MaxPreviewLength = 80;
 

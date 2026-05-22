@@ -4,7 +4,7 @@ using AgriMarket.Modules.Users.Enums;
 
 namespace AgriMarket.Modules.Users.Services;
 
-public interface IUserService
+internal interface IUserService
 {
     Task<IEnumerable<UserProfileDto>> GetAllUsersAsync(CancellationToken ct = default);
     Task<UserProfileDto?> GetUserByIdAsync(Guid id, Guid? callerUserId = null, bool isAdmin = false, CancellationToken ct = default);

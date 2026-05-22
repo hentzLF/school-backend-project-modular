@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Client.ViewModels.Equipment;
 
-public class EquipmentAssignViewModel
+internal class EquipmentAssignViewModel
 {
     public Guid ListingId { get; set; }
     public string ListingTitle { get; set; } = default!;

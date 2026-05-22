@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.MyListings
 {
-    public class BookingsForListingViewModel
+    internal class BookingsForListingViewModel
     {
         public Guid ListingId { get; set; }
         public string ListingTitle { get; set; } = default!;

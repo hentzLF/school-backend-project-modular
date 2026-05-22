@@ -4,7 +4,7 @@ using AgriMarket.Web.Models;
 
 namespace AgriMarket.Web.Controllers;
 
-public class HomeController : Controller
+internal class HomeController : Controller
 {
     public IActionResult Index()
     {

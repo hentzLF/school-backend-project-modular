@@ -6,7 +6,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.MyListings;
 
 namespace AgriMarket.Web.Mappers;
 
-public static class ListingViewModelMapper
+internal static class ListingViewModelMapper
 {
     public static ListingIndexItemViewModel ToClientIndexItem(this ListingSummaryDto dto)
     {

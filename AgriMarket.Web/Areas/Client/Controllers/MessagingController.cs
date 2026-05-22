@@ -12,7 +12,7 @@ namespace AgriMarket.Web.Areas.Client.Controllers;
 [Area("Client")]
 [Authorize]
 [Route("Client/Messages")]
-public class MessagingController(
+internal class MessagingController(
     IMessagingService messagingService,
     IUserService userService) : Controller
 {

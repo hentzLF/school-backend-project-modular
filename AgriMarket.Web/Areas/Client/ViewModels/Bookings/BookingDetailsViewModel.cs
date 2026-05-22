@@ -3,7 +3,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Bookings;
 
-public class BookingDetailsViewModel
+internal class BookingDetailsViewModel
 {
     public Guid Id { get; set; }
     public BookingStatus Status { get; set; }

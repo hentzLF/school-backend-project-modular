@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Messaging.Entities;
 
-public sealed class Conversation
+internal sealed class Conversation
 {
     public Guid Id { get; set; }
 

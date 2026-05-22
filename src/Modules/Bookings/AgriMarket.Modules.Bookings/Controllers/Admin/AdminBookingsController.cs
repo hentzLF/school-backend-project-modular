@@ -24,9 +24,9 @@ internal sealed class AdminBookingsController(IBookingService bookingService) : 
     public async Task<IActionResult> GetAll(
         [FromQuery] BookingStatus? status,
         [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 20)
+        [FromQuery] int pageSize = PaginationDefaults.DefaultPageSize)
     {
-        if (pageSize > 100) pageSize = 100;
+        if (pageSize > PaginationDefaults.MaxPageSize) pageSize = PaginationDefaults.MaxPageSize;
         if (page < 1) page = 1;
 
         var allItems = await _bookingService.GetAllAsync(status);

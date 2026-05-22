@@ -3,7 +3,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Modules.Bookings.Dtos.Bookings;
 
-public sealed class BookingDto
+internal sealed class BookingDto
 {
     public Guid Id { get; init; }
     public BookingStatus Status { get; init; }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class ListingEditViewModel
+internal class ListingEditViewModel
 {
     public Guid Id { get; set; }
 

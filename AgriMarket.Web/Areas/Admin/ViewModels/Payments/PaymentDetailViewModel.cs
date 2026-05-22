@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class PaymentDetailViewModel
+internal class PaymentDetailViewModel
 {
     public Guid Id { get; set; }
     public decimal Amount { get; set; }

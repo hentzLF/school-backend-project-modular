@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Messaging;
 
-public class SendMessageViewModel
+internal class SendMessageViewModel
 {
     public Guid ConversationId { get; set; }
 

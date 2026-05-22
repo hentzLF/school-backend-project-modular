@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Modules.Marketplace.Persistence;
 
-public sealed class MarketplaceDbContext : DbContext
+internal sealed class MarketplaceDbContext : DbContext
 {
     public MarketplaceDbContext(DbContextOptions<MarketplaceDbContext> options)
         : base(options)

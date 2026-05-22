@@ -3,7 +3,7 @@ using AgriMarket.Shared.Dtos;
 
 namespace AgriMarket.Modules.Messaging.Services;
 
-public interface IMessagingService
+internal interface IMessagingService
 {
     Task<(ConversationDto Conversation, bool IsNew)> CreateConversationAsync(
         Guid callerProfileId, CreateConversationDto dto, CancellationToken ct = default);

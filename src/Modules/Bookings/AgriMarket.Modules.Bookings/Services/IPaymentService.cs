@@ -3,7 +3,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Modules.Bookings.Services;
 
-public interface IPaymentService
+internal interface IPaymentService
 {
     Task<IEnumerable<Payment>> GetAllAsync(PaymentStatus? status);
     Task<Payment?> GetByIdAsync(Guid id);

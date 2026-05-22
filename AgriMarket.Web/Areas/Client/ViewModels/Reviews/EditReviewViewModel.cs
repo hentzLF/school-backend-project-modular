@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Reviews;
 
-public class EditReviewViewModel
+internal class EditReviewViewModel
 {
     [Required]
     public Guid ReviewId { get; set; }

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Modules.Bookings.Dtos.Bookings;
 
-public sealed class CreateBookingDto
+internal sealed class CreateBookingDto
 {
     [Required]
     public Guid ServiceListingId { get; init; }

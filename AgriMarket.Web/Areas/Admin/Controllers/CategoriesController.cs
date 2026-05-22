@@ -7,7 +7,7 @@ namespace AgriMarket.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 [Authorize(Policy = "AdminOnly")]
-public class CategoriesController : Controller
+internal class CategoriesController : Controller
 {
     private readonly ICategoryService _categoryService;
 

@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Messaging.Dtos;
 
-public sealed class UnreadCountDto
+internal sealed class UnreadCountDto
 {
     public int UnreadCount { get; init; }
 }

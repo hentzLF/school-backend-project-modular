@@ -10,7 +10,7 @@ namespace AgriMarket.Web.Areas.Client.Controllers;
 
 [Area("Client")]
 [Authorize(Policy = "ClientOnly")]
-public class PaymentsController(
+internal class PaymentsController(
     IPaymentService paymentService,
     IClientPaymentService clientPaymentService,
     IUserService userService) : Controller

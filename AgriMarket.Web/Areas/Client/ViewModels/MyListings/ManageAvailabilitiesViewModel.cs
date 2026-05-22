@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.MyListings
 {
-    public class ManageAvailabilitiesViewModel
+    internal class ManageAvailabilitiesViewModel
     {
         public Guid ListingId { get; set; }
         public string ListingTitle { get; set; } = string.Empty;

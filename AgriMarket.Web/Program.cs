@@ -1,3 +1,6 @@
+using System.Globalization;
+using System.Reflection;
+using System.Security.Claims;
 using AgriMarket.Modules.Bookings;
 using AgriMarket.Modules.Marketplace;
 using AgriMarket.Modules.Messaging;
@@ -7,9 +10,9 @@ using AgriMarket.Resources;
 using AgriMarket.Shared.Modules;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Razor;
-using System.Globalization;
-using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +28,9 @@ foreach (var module in modules)
     module.RegisterServices(builder.Services, builder.Configuration);
 
 builder.Services.AddControllersWithViews()
-    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .ConfigureApplicationPartManager(manager =>
+        manager.FeatureProviders.Add(new InternalControllerFeatureProvider()));
 builder.Services.AddLocalization();
 builder.Services.AddScoped<IMessageNotifier, AgriMarket.Web.Services.NoOpMessageNotifier>();
 
@@ -115,3 +120,18 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 app.Run();
+
+internal sealed class InternalControllerFeatureProvider : ControllerFeatureProvider
+{
+    protected override bool IsController(TypeInfo typeInfo)
+    {
+        if (!typeInfo.IsClass || typeInfo.IsAbstract || typeInfo.ContainsGenericParameters)
+            return false;
+
+        if (typeInfo.IsDefined(typeof(NonControllerAttribute)))
+            return false;
+
+        return typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
+            || typeInfo.IsDefined(typeof(ControllerAttribute));
+    }
+}

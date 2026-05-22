@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class ListingListItemViewModel
+internal class ListingListItemViewModel
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = default!;

@@ -2,7 +2,7 @@ using AgriMarket.Modules.Users.Enums;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class UserDetailViewModel
+internal class UserDetailViewModel
 {
     public Guid Id { get; set; }
     public string Email { get; set; } = default!;
@@ -15,7 +15,7 @@ public class UserDetailViewModel
     public int ListingsCount { get; set; }
 }
 
-public class UserProfileDetailViewModel
+internal class UserProfileDetailViewModel
 {
     public Guid Id { get; set; }
     public string FirstName { get; set; } = default!;

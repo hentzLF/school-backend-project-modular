@@ -11,7 +11,7 @@ namespace AgriMarket.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 [Authorize(Policy = "AdminOnly")]
-public class ListingsController(IListingService listingService, ICategoryService categoryService, IBookingService bookingService) : Controller
+internal class ListingsController(IListingService listingService, ICategoryService categoryService, IBookingService bookingService) : Controller
 {
     public async Task<IActionResult> Index(bool? active)
     {

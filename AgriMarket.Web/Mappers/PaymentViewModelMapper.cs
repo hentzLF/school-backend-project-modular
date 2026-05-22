@@ -5,7 +5,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.Payments;
 
 namespace AgriMarket.Web.Mappers;
 
-public static class PaymentViewModelMapper
+internal static class PaymentViewModelMapper
 {
     public static PaymentListItemViewModel ToAdminListItem(this Payment p)
     {

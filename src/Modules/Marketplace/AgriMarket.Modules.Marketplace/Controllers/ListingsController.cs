@@ -11,7 +11,7 @@ using EquipmentDtos = AgriMarket.Modules.Marketplace.Dtos.Equipment;
 
 namespace AgriMarket.Modules.Marketplace.Controllers;
 
-public sealed record CreateAvailabilityRequest(DateTime StartTime, DateTime EndTime);
+internal sealed record CreateAvailabilityRequest(DateTime StartTime, DateTime EndTime);
 
 [ApiController]
 [ApiVersion("1")]
@@ -25,9 +25,9 @@ internal sealed class ListingsController(
 
     [HttpGet]
     [ProducesResponseType(typeof(PaginatedResponse<ListingSummaryDto>), 200)]
-    public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+    public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = PaginationDefaults.DefaultPageSize)
     {
-        if (pageSize > 100) pageSize = 100;
+        if (pageSize > PaginationDefaults.MaxPageSize) pageSize = PaginationDefaults.MaxPageSize;
         if (page < 1) page = 1;
 
         var allItems = await _listingService.GetAllAsync();

@@ -2,7 +2,7 @@ using AgriMarket.Modules.Users.Enums;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Profile;
 
-public class ProfileViewModel
+internal class ProfileViewModel
 {
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;

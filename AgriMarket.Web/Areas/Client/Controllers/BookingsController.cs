@@ -14,7 +14,7 @@ namespace AgriMarket.Web.Areas.Client.Controllers;
 
 [Area("Client")]
 [Authorize(Policy = "ClientOnly")]
-public class BookingsController(
+internal class BookingsController(
     IBookingService bookingService,
     IUserService userService,
     IClientPaymentService clientPaymentService,

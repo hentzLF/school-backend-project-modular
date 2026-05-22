@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.Payments;
 
-public class CheckoutViewModel
+internal class CheckoutViewModel
 {
     public Guid BookingId { get; set; }
     public string ListingTitle { get; set; } = default!;

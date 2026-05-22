@@ -2,7 +2,7 @@ using AgriMarket.Modules.Marketplace.Enums;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Equipment;
 
-public sealed class EquipmentDto
+internal sealed class EquipmentDto
 {
     public Guid Id { get; init; }
     public string Name { get; init; } = default!;

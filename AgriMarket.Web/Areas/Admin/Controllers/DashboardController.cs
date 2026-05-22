@@ -8,7 +8,7 @@ namespace AgriMarket.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 [Authorize(Policy = "AdminOnly")]
-public class DashboardController : Controller
+internal class DashboardController : Controller
 {
     private readonly IDashboardService _dashboardService;
 

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AgriMarket.Modules.Bookings.Dtos.Reviews;
 
-public sealed class CreateReviewDto
+internal sealed class CreateReviewDto
 {
     [Required]
     public Guid BookingId { get; init; }

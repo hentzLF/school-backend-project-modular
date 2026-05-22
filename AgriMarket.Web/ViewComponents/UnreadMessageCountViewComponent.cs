@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace AgriMarket.Web.ViewComponents;
 
-public class UnreadMessageCountViewComponent(
+internal class UnreadMessageCountViewComponent(
     IMessagingService messagingService,
     IUserService userService) : ViewComponent
 {

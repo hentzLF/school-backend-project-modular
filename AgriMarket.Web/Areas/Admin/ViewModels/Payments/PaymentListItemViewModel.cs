@@ -2,7 +2,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class PaymentListItemViewModel
+internal class PaymentListItemViewModel
 {
     public Guid Id { get; set; }
     public Guid BookingId { get; set; }

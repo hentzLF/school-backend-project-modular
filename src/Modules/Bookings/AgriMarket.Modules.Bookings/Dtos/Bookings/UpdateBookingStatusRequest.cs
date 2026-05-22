@@ -3,7 +3,7 @@ using AgriMarket.Modules.Bookings.Enums;
 
 namespace AgriMarket.Modules.Bookings.Dtos.Bookings;
 
-public sealed class UpdateBookingStatusRequest
+internal sealed class UpdateBookingStatusRequest
 {
     [Required]
     [EnumDataType(typeof(BookingStatus))]

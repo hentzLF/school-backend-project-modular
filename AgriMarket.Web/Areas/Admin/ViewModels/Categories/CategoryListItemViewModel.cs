@@ -1,6 +1,6 @@
 namespace AgriMarket.Web.Areas.Admin.ViewModels;
 
-public class CategoryListItemViewModel
+internal class CategoryListItemViewModel
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = default!;

@@ -5,7 +5,7 @@ using AgriMarket.Web.Areas.Client.ViewModels.MyListings;
 
 namespace AgriMarket.Web.Mappers;
 
-public static class BookingViewModelMapper
+internal static class BookingViewModelMapper
 {
     public static CreateBookingDto ToCreateBookingDto(this CreateBookingViewModel vm)
     {

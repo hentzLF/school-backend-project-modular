@@ -12,7 +12,7 @@ namespace AgriMarket.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
 [Authorize(Policy = "AdminOnly")]
-public class UsersController : Controller
+internal class UsersController : Controller
 {
     private readonly IUserService _userService;
     private readonly IBookingService _bookingService;

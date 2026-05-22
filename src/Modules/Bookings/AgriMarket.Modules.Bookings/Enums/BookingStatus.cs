@@ -1,6 +1,6 @@
 namespace AgriMarket.Modules.Bookings.Enums;
 
-public enum BookingStatus
+internal enum BookingStatus
 {
     Pending = 1,
     Confirmed = 2,

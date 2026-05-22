@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <InternalsVisibleTo>AgriMarket.E2E</InternalsVisibleTo>
-  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="AgriMarket.Tests" />
+    <InternalsVisibleTo Include="AgriMarket.E2E" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\src\Shared\AgriMarket.Shared\AgriMarket.Shared.csproj" />

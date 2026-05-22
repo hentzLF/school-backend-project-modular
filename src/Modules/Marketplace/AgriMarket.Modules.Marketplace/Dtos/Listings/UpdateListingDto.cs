@@ -3,7 +3,7 @@ using AgriMarket.Modules.Marketplace.Dtos.Locations;
 
 namespace AgriMarket.Modules.Marketplace.Dtos.Listings;
 
-public sealed class UpdateListingDto
+internal sealed class UpdateListingDto
 {
     [Required]
     public Guid Id { get; init; }

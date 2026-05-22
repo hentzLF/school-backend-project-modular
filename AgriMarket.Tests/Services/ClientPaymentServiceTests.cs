@@ -155,19 +155,19 @@ public class ClientPaymentServiceTests
     }
 
     [Theory]
-    [InlineData(BookingStatus.Pending)]
-    [InlineData(BookingStatus.Confirmed)]
-    [InlineData(BookingStatus.InProgress)]
-    [InlineData(BookingStatus.ProviderCompleted)]
-    [InlineData(BookingStatus.ClientConfirmed)]
-    [InlineData(BookingStatus.Archived)]
-    [InlineData(BookingStatus.Cancelled)]
-    [InlineData(BookingStatus.Disputed)]
-    public async Task PayAsync_BookingNotAwaitingPayment_ThrowsBusinessRuleException(BookingStatus status)
+    [InlineData((int)BookingStatus.Pending)]
+    [InlineData((int)BookingStatus.Confirmed)]
+    [InlineData((int)BookingStatus.InProgress)]
+    [InlineData((int)BookingStatus.ProviderCompleted)]
+    [InlineData((int)BookingStatus.ClientConfirmed)]
+    [InlineData((int)BookingStatus.Archived)]
+    [InlineData((int)BookingStatus.Cancelled)]
+    [InlineData((int)BookingStatus.Disputed)]
+    public async Task PayAsync_BookingNotAwaitingPayment_ThrowsBusinessRuleException(int statusValue)
     {
         // Arrange
         var booking = CreateAwaitingPaymentBooking();
-        booking.Status = status;
+        booking.Status = (BookingStatus)statusValue;
         SetupBookingForUpdate(booking);
 
         // Act
@@ -199,14 +199,15 @@ public class ClientPaymentServiceTests
     // -------------------------------------------------------------------------
 
     [Theory]
-    [InlineData(PaymentMethod.Card, "Card")]
-    [InlineData(PaymentMethod.BankTransfer, "BankTransfer")]
-    [InlineData(PaymentMethod.Cash, "Cash")]
+    [InlineData((int)PaymentMethod.Card, "Card")]
+    [InlineData((int)PaymentMethod.BankTransfer, "BankTransfer")]
+    [InlineData((int)PaymentMethod.Cash, "Cash")]
     public async Task PayAsync_EachValidMethod_ReturnsMatchingMethodInReceipt(
-        PaymentMethod method,
+        int methodValue,
         string expectedMethodName)
     {
         // Arrange
+        var method = (PaymentMethod)methodValue;
         var booking = CreateAwaitingPaymentBooking();
         SetupBookingForUpdate(booking);
 

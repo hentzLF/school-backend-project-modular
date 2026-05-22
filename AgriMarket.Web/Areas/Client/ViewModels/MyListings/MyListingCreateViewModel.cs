@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AgriMarket.Web.Areas.Client.ViewModels.MyListings
 {
-    public class MyListingCreateViewModel
+    internal class MyListingCreateViewModel
     {
         [Required]
         public string Title { get; set; } = default!;
