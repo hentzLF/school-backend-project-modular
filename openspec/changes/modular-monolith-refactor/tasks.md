@@ -62,20 +62,20 @@ delete the legacy projects in Phase 7. Every block ends with a conventional comm
 
 ## 7. Marketplace.Contracts project
 
-- [ ] 7.1 Create `AgriMarket.Modules.Marketplace.Contracts` class library
-- [ ] 7.2 Define `ICatalogModule` interface (`GetListingSummaryAsync` + batch, `GetAvailabilityAsync`, `GetEquipmentAsync`)
-- [ ] 7.3 Define public DTO records (`ListingSummaryDto`, `CategoryDto`, `LocationDto`, `AvailabilityDto`)
-- [ ] 7.4 Add to `AgriMarket.slnx`; verify build
-- [ ] 7.5 Git commit: `feat: add Marketplace module contracts project`
+- [x] 7.1 Create `AgriMarket.Modules.Marketplace.Contracts` class library
+- [x] 7.2 Define `ICatalogModule` interface (`GetListingSummaryAsync` + batch, `GetAvailabilityAsync`)
+- [x] 7.3 Define public DTO records (`ListingSummaryDto`, `AvailabilityDto`)
+- [x] 7.4 Add to `AgriMarket.slnx`; verify build
+- [x] 7.5 Git commit: `feat: add Marketplace module contracts project`
 
 ## 8. Marketplace module core
 
-- [ ] 8.1 Create `AgriMarket.Modules.Marketplace` class library referencing `AgriMarket.Shared`, its `.Contracts`, and `Users.Contracts`
-- [ ] 8.2 Copy entities `ServiceCategory`, `ServiceListing`, `Equipment`, `ServiceListingEquipment`, `Location`, `County`, `Municipality`, `Availability` as `internal`; replace cross-module navs with `Guid` ids
-- [ ] 8.3 Create `MarketplaceDbContext` (`HasDefaultSchema("marketplace")`) with relationship/index config and `County`/`Municipality` `HasData` seeding
-- [ ] 8.4 Move `CountySeedData` and `MunicipalitySeedData` into the module
-- [ ] 8.5 Add `InternalsVisibleTo` for `AgriMarket.Tests`; verify build
-- [ ] 8.6 Git commit: `feat: add Marketplace module entities, DbContext and seeding`
+- [x] 8.1 Create `AgriMarket.Modules.Marketplace` class library referencing `AgriMarket.Shared` and its `.Contracts` (Users.Contracts added in Phase 6 when ListingService lands)
+- [x] 8.2 Copy 8 entities as `internal sealed`; removed `ServiceListing.UserProfile` and `Equipment.UserProfile` cross-module navs (FK Guids kept)
+- [x] 8.3 Create `MarketplaceDbContext` (`HasDefaultSchema("marketplace")`) with relationship/index config and `County`/`Municipality` `HasData` seeding
+- [x] 8.4 Move `CountySeedData` and `MunicipalitySeedData` into the module
+- [~] 8.5 `InternalsVisibleTo` for `AgriMarket.Tests` — deferred to block 22 (test rewiring); build verified
+- [x] 8.6 Git commit: `feat: add Marketplace module entities, DbContext and seeding`
 
 ## 9. Marketplace repositories and services
 

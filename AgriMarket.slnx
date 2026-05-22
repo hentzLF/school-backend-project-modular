@@ -7,5 +7,7 @@
   <Project Path="AgriMarket.Resources/AgriMarket.Resources.csproj" />
   <Project Path="src/Modules/Users/AgriMarket.Modules.Users.Contracts/AgriMarket.Modules.Users.Contracts.csproj" />
   <Project Path="src/Modules/Users/AgriMarket.Modules.Users/AgriMarket.Modules.Users.csproj" />
+  <Project Path="src/Modules/Marketplace/AgriMarket.Modules.Marketplace.Contracts/AgriMarket.Modules.Marketplace.Contracts.csproj" />
+  <Project Path="src/Modules/Marketplace/AgriMarket.Modules.Marketplace/AgriMarket.Modules.Marketplace.csproj" />
   <Project Path="AgriMarket.Web/AgriMarket.Web.csproj" />
 </Solution>
