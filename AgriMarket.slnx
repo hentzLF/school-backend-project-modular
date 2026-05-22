@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="AgriMarket.Api/AgriMarket.Api.csproj" />
+  <Project Path="src/Shared/AgriMarket.Shared/AgriMarket.Shared.csproj" />
   <Project Path="AgriMarket.BLL/AgriMarket.BLL.csproj" />
   <Project Path="AgriMarket.DAL/AgriMarket.DAL.csproj" />
   <Project Path="AgriMarket.Domain/AgriMarket.Domain.csproj" />
