@@ -9,4 +9,4 @@ deploy:
     - csharp-backend
   script:
     - docker network create agrimarket-net 2>/dev/null || true
-    - docker compose up --build --remove-orphans --detach
+    - docker compose -f docker-compose.yml -f docker-compose.ci.yml up --build --remove-orphans --detach
