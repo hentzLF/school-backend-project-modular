@@ -74,7 +74,9 @@ dotnet test
 ## Docker
 
 ```bash
-docker build -t agrimarket-backend .
+docker compose up --build
+# Optional overrides:
+# AGRI_POSTGRES_PORT=5434 AGRI_JWT_KEY="change-me-to-32-chars-min" docker compose up --build
 ```
 
 ## Development Guidelines
