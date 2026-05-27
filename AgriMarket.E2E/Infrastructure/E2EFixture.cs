@@ -1,13 +1,8 @@
-using AgriMarket.BLL.Contracts;
-using AgriMarket.DAL;
-using AgriMarket.DAL.Seeding;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Playwright;
 using Testcontainers.PostgreSql;
@@ -57,18 +52,12 @@ public sealed class E2EFixture : IAsyncLifetime
             "ConnectionStrings__DefaultConnection",
             _postgres.GetConnectionString());
 
-        _factory = new KestrelWebApplicationFactory(_postgres.GetConnectionString());
+        _factory = new KestrelWebApplicationFactory();
 
         // Trigger host creation via CreateClient (which goes through EnsureServer -> CreateHost)
         _ = _factory.CreateClient();
 
         BaseUrl = _factory.ServerAddress;
-
-        using var scope = _factory.RealServices.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        await context.Database.MigrateAsync();
-        var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
-        await AppDbSeeder.SeedAsync(context, passwordHasher);
 
         _playwright = await Playwright.CreateAsync();
         _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
@@ -90,30 +79,17 @@ public sealed class E2EFixture : IAsyncLifetime
 
     private sealed class KestrelWebApplicationFactory : WebApplicationFactory<Program>
     {
-        private readonly string _connectionString;
-
         public string ServerAddress { get; private set; } = "";
         public IHost? RealHost { get; private set; }
         public IServiceProvider RealServices => RealHost!.Services;
 
-        public KestrelWebApplicationFactory(string connectionString)
+        public KestrelWebApplicationFactory()
         {
-            _connectionString = connectionString;
         }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseEnvironment("Testing");
-            builder.ConfigureServices(services =>
-            {
-                var descriptor = services.SingleOrDefault(
-                    d => d.ServiceType == typeof(DbContextOptions<AppDbContext>));
-                if (descriptor is not null)
-                    services.Remove(descriptor);
-
-                services.AddDbContext<AppDbContext>(options =>
-                    options.UseNpgsql(_connectionString));
-            });
         }
 
         protected override IHost CreateHost(IHostBuilder builder)
