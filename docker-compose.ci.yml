@@ -1,7 +1,4 @@
 services:
-  agrimarket-db:
-    ports: []
-
   agrimarket-api:
     ports: []
 
