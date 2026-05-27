@@ -74,6 +74,7 @@ dotnet test
 ## Docker
 
 ```bash
+docker network create agrimarket-net 2>/dev/null || true
 AGRI_POSTGRES_HOST=your-db-host AGRI_POSTGRES_DB_PORT=5432 AGRI_JWT_KEY="change-me-to-32-chars-min" \
   docker compose up --build
 ```

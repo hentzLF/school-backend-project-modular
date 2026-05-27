@@ -35,3 +35,4 @@ services:
 
 networks:
   agrimarket-net:
+    external: true
