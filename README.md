@@ -76,7 +76,9 @@ dotnet test
 ```bash
 docker compose up --build
 # Optional overrides:
-# AGRI_POSTGRES_PORT=5434 AGRI_JWT_KEY="change-me-to-32-chars-min" docker compose up --build
+# AGRI_POSTGRES_HOST_PORT=5434 AGRI_JWT_KEY="change-me-to-32-chars-min" docker compose up --build
+# Use external PostgreSQL (skip local db container):
+# AGRI_POSTGRES_HOST=your-db-host AGRI_POSTGRES_DB_PORT=5432 docker compose up --build --scale agrimarket-db=0
 ```
 
 ## Development Guidelines
