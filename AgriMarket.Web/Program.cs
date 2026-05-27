@@ -27,6 +27,11 @@ IModule[] modules =
 foreach (var module in modules)
     module.RegisterServices(builder.Services, builder.Configuration);
 
+var moduleAssemblies = modules.Select(m => m.GetType().Assembly).ToArray();
+
+// MediatR — integration events and their handlers span every module assembly
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(moduleAssemblies));
+
 builder.Services.AddControllersWithViews()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .ConfigureApplicationPartManager(manager =>
