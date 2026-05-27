@@ -19,7 +19,7 @@ services:
       dockerfile: src/Bootstrapper/AgriMarket.Api/Dockerfile
     restart: unless-stopped
     ports:
-      - "${AGRI_API_PORT:-5047}:8080"
+      - "${AGRI_API_PORT:-5057}:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
@@ -40,7 +40,7 @@ services:
       dockerfile: AgriMarket.Web/Dockerfile
     restart: unless-stopped
     ports:
-      - "${AGRI_WEB_PORT:-5046}:8080"
+      - "${AGRI_WEB_PORT:-5056}:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
