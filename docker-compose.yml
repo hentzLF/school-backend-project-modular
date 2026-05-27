@@ -1,18 +1,4 @@
 services:
-  agrimarket-db:
-    image: postgres:17-alpine
-    restart: unless-stopped
-    environment:
-      - POSTGRES_DB=${AGRI_POSTGRES_DB:-agrimarket}
-      - POSTGRES_USER=${AGRI_POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${AGRI_POSTGRES_PASSWORD:-postgres}
-    volumes:
-      - agrimarket-pgdata:/var/lib/postgresql/data
-    ports:
-      - "${AGRI_DB_PORT:-5433}:5432"
-    networks:
-      - agrimarket-net
-
   agrimarket-api:
     build:
       context: .
