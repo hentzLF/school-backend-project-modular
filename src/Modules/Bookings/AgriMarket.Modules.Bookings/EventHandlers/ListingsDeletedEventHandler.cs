@@ -2,6 +2,7 @@ using AgriMarket.Modules.Bookings.Entities;
 using AgriMarket.Modules.Marketplace.Contracts;
 using AgriMarket.Shared.Persistence;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Bookings.EventHandlers;
 
@@ -11,7 +12,7 @@ namespace AgriMarket.Modules.Bookings.EventHandlers;
 /// database.
 /// </summary>
 internal sealed class ListingsDeletedEventHandler(
-    IRepository<Booking> bookings) : INotificationHandler<ListingsDeletedEvent>
+    [FromKeyedServices("bookings")] IRepository<Booking> bookings) : INotificationHandler<ListingsDeletedEvent>
 {
     public async Task Handle(ListingsDeletedEvent notification, CancellationToken cancellationToken)
     {

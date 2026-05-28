@@ -26,7 +26,7 @@ public sealed class BookingsModule : IModule
                 npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "bookings")));
 
         services.AddKeyedScoped<IUnitOfWork, EfUnitOfWork>("bookings");
-        services.AddKeyedScoped(typeof(IRepository<>), typeof(EfRepository<>), "bookings");
+        services.AddKeyedScoped(typeof(IRepository<>), "bookings", typeof(EfRepository<>));
         services.AddScoped<IQueryMaterializer, EfQueryMaterializer>();
         services.AddScoped<IBookingRepository, EfBookingRepository>();
         services.AddScoped<IPaymentRepository, EfPaymentRepository>();

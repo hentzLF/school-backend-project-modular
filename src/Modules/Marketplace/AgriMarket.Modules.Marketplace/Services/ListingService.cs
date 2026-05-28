@@ -19,8 +19,8 @@ namespace AgriMarket.Modules.Marketplace.Services;
 internal sealed class ListingService(
     IListingRepository listingRepository,
     IAvailabilityRepository availabilityRepository,
-    IRepository<Location> locations,
-    IRepository<Municipality> municipalities,
+    [FromKeyedServices("marketplace")] IRepository<Location> locations,
+    [FromKeyedServices("marketplace")] IRepository<Municipality> municipalities,
     [FromKeyedServices("marketplace")] IUnitOfWork uow,
     IUsersModule usersModule,
     IBookingsModule bookingsModule,

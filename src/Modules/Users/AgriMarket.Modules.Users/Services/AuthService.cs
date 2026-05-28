@@ -12,7 +12,7 @@ namespace AgriMarket.Modules.Users.Services;
 
 internal sealed class AuthService(
     IAppUserRepository appUsers,
-    IRepository<UserRole> userRoles,
+    [FromKeyedServices("users")] IRepository<UserRole> userRoles,
     IRefreshTokenRepository refreshTokens,
     [FromKeyedServices("users")] IUnitOfWork uow,
     ITokenService tokenService,

@@ -7,8 +7,8 @@ using Microsoft.Extensions.Logging;
 namespace AgriMarket.Modules.Marketplace.Services;
 
 internal sealed class CategoryService(
-    IRepository<ServiceCategory> categories,
-    IRepository<ServiceListing> listings,
+    [FromKeyedServices("marketplace")] IRepository<ServiceCategory> categories,
+    [FromKeyedServices("marketplace")] IRepository<ServiceListing> listings,
     [FromKeyedServices("marketplace")] IUnitOfWork uow,
     IQueryMaterializer mat,
     ILogger<CategoryService> logger) : ICategoryService

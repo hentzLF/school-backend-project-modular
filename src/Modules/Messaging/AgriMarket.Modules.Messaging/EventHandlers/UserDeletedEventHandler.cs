@@ -2,6 +2,7 @@ using AgriMarket.Modules.Messaging.Entities;
 using AgriMarket.Modules.Users.Contracts;
 using AgriMarket.Shared.Persistence;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Messaging.EventHandlers;
 
@@ -10,9 +11,10 @@ namespace AgriMarket.Modules.Messaging.EventHandlers;
 /// profiles' read receipts, sent messages and conversation memberships.
 /// </summary>
 internal sealed class UserDeletedEventHandler(
-    IRepository<MessageRead> messageReads,
-    IRepository<Message> messages,
-    IRepository<ConversationParticipant> participants) : INotificationHandler<UserDeletedEvent>
+    [FromKeyedServices("messaging")] IRepository<MessageRead> messageReads,
+    [FromKeyedServices("messaging")] IRepository<Message> messages,
+    [FromKeyedServices("messaging")] IRepository<ConversationParticipant> participants)
+    : INotificationHandler<UserDeletedEvent>
 {
     public async Task Handle(UserDeletedEvent notification, CancellationToken cancellationToken)
     {

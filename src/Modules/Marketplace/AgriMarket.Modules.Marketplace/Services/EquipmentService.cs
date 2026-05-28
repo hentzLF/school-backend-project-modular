@@ -9,9 +9,9 @@ using Microsoft.Extensions.Logging;
 namespace AgriMarket.Modules.Marketplace.Services;
 
 internal sealed class EquipmentService(
-    IRepository<Equipment> equipments,
-    IRepository<ServiceListing> listings,
-    IRepository<ServiceListingEquipment> listingEquipments,
+    [FromKeyedServices("marketplace")] IRepository<Equipment> equipments,
+    [FromKeyedServices("marketplace")] IRepository<ServiceListing> listings,
+    [FromKeyedServices("marketplace")] IRepository<ServiceListingEquipment> listingEquipments,
     [FromKeyedServices("marketplace")] IUnitOfWork uow,
     IQueryMaterializer mat,
     ILogger<EquipmentService> logger) : IEquipmentService

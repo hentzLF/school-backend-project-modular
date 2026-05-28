@@ -3,6 +3,7 @@ using AgriMarket.Modules.Marketplace.Entities;
 using AgriMarket.Modules.Users.Contracts;
 using AgriMarket.Shared.Persistence;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Marketplace.EventHandlers;
 
@@ -12,10 +13,10 @@ namespace AgriMarket.Modules.Marketplace.EventHandlers;
 /// <see cref="ListingsDeletedEvent"/> so the Bookings module can cascade in turn.
 /// </summary>
 internal sealed class UserDeletedEventHandler(
-    IRepository<ServiceListing> listings,
-    IRepository<Location> locations,
-    IRepository<Equipment> equipment,
-    IRepository<ServiceListingEquipment> listingEquipment,
+    [FromKeyedServices("marketplace")] IRepository<ServiceListing> listings,
+    [FromKeyedServices("marketplace")] IRepository<Location> locations,
+    [FromKeyedServices("marketplace")] IRepository<Equipment> equipment,
+    [FromKeyedServices("marketplace")] IRepository<ServiceListingEquipment> listingEquipment,
     IMediator mediator) : INotificationHandler<UserDeletedEvent>
 {
     public async Task Handle(UserDeletedEvent notification, CancellationToken cancellationToken)

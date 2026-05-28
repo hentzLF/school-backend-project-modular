@@ -17,9 +17,9 @@ namespace AgriMarket.Modules.Messaging.Services;
 /// </summary>
 internal sealed class MessagingService(
     IConversationRepository conversationRepo,
-    IRepository<Conversation> conversations,
-    IRepository<Message> messages,
-    IRepository<MessageRead> messageReads,
+    [FromKeyedServices("messaging")] IRepository<Conversation> conversations,
+    [FromKeyedServices("messaging")] IRepository<Message> messages,
+    [FromKeyedServices("messaging")] IRepository<MessageRead> messageReads,
     [FromKeyedServices("messaging")] IUnitOfWork uow,
     IUsersModule users,
     IMessageNotifier notifier) : IMessagingService

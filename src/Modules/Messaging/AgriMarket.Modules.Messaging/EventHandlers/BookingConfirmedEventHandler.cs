@@ -12,7 +12,7 @@ namespace AgriMarket.Modules.Messaging.EventHandlers;
 /// provider (idempotent — skipped if one already exists for the booking).
 /// </summary>
 internal sealed class BookingConfirmedEventHandler(
-    IRepository<Conversation> conversations,
+    [FromKeyedServices("messaging")] IRepository<Conversation> conversations,
     [FromKeyedServices("messaging")] IUnitOfWork uow) : INotificationHandler<BookingConfirmedEvent>
 {
     public async Task Handle(BookingConfirmedEvent notification, CancellationToken cancellationToken)

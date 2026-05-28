@@ -7,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace AgriMarket.Modules.Marketplace;
 
 internal sealed class CatalogModuleApi(
-    IRepository<ServiceListing> listings,
-    IRepository<Availability> availabilities,
+    [FromKeyedServices("marketplace")] IRepository<ServiceListing> listings,
+    [FromKeyedServices("marketplace")] IRepository<Availability> availabilities,
     [FromKeyedServices("marketplace")] IUnitOfWork uow) : ICatalogModule
 {
     public async Task<bool> TryReserveAvailabilityAsync(Guid availabilityId, CancellationToken ct = default)

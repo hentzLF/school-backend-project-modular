@@ -1,12 +1,13 @@
 using AgriMarket.Modules.Marketplace.Dtos.Locations;
 using AgriMarket.Modules.Marketplace.Entities;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Marketplace.Services;
 
 internal sealed class LocationLookupService(
-    IRepository<County> counties,
-    IRepository<Municipality> municipalities) : ILocationLookupService
+    [FromKeyedServices("marketplace")] IRepository<County> counties,
+    [FromKeyedServices("marketplace")] IRepository<Municipality> municipalities) : ILocationLookupService
 {
     public async Task<IReadOnlyList<CountyDto>> GetAllCountiesAsync(CancellationToken ct = default)
     {

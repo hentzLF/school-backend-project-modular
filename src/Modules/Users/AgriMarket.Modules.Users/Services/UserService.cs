@@ -15,7 +15,7 @@ namespace AgriMarket.Modules.Users.Services;
 internal sealed class UserService(
     IAppUserRepository appUsers,
     IUserProfileRepository userProfiles,
-    IRepository<UserRole> userRoles,
+    [FromKeyedServices("users")] IRepository<UserRole> userRoles,
     [FromKeyedServices("users")] IUnitOfWork uow,
     IBookingsModule bookings,
     IMediator mediator,

@@ -26,7 +26,7 @@ public sealed class MessagingModule : IModule
                 npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "messaging")));
 
         services.AddKeyedScoped<IUnitOfWork, EfUnitOfWork>("messaging");
-        services.AddKeyedScoped(typeof(IRepository<>), typeof(EfRepository<>), "messaging");
+        services.AddKeyedScoped(typeof(IRepository<>), "messaging", typeof(EfRepository<>));
         services.AddScoped<IQueryMaterializer, EfQueryMaterializer>();
         services.AddScoped<IConversationRepository, EfConversationRepository>();
         services.AddScoped<IMessagingService, MessagingService>();
