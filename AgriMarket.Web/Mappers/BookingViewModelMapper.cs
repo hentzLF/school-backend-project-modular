@@ -43,8 +43,8 @@ internal static class BookingViewModelMapper
             Notes = dto.Notes,
             ListingTitle = dto.ListingTitle,
             ListingId = dto.ServiceListingId,
-            AvailabilityStart = dto.AvailabilityStart,
-            AvailabilityEnd = dto.AvailabilityEnd,
+            AvailabilityStart = dto.AvailabilityStart.GetValueOrDefault(),
+            AvailabilityEnd = dto.AvailabilityEnd.GetValueOrDefault(),
             ProviderProfileId = dto.ProviderProfileId,
             ClientProfileId = dto.ClientProfileId
         };
@@ -78,8 +78,8 @@ internal static class BookingViewModelMapper
             ClientProfileId = dto.ClientProfileId,
             ListingTitle = dto.ListingTitle,
             ListingId = dto.ServiceListingId,
-            AvailabilityStart = dto.AvailabilityStart,
-            AvailabilityEnd = dto.AvailabilityEnd
+            AvailabilityStart = dto.AvailabilityStart.GetValueOrDefault(),
+            AvailabilityEnd = dto.AvailabilityEnd.GetValueOrDefault()
         };
     }
 
