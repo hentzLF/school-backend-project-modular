@@ -16,6 +16,7 @@ namespace AgriMarket.Web.Areas.Client.Controllers;
 internal class ListingsController(
     IListingService listingService,
     IBookingService bookingService,
+    IUserService userService,
     IReviewService reviewService,
     IEquipmentService equipmentService) : Controller
 {
@@ -75,9 +76,13 @@ internal class ListingsController(
         if (!Guid.TryParse(userIdStr, out var userId))
             return Unauthorized();
 
+        var clientProfile = await userService.GetProfileByUserIdAsync(userId);
+        if (clientProfile is null)
+            return Unauthorized();
+
         try
         {
-            var booking = await bookingService.CreateAsync(userId, model.ToCreateBookingDto());
+            var booking = await bookingService.CreateAsync(clientProfile.Id, model.ToCreateBookingDto());
             return RedirectToAction("Details", "Bookings", new { area = "Client", id = booking.Id });
         }
         catch (BusinessRuleException ex)
