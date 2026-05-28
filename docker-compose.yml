@@ -16,6 +16,7 @@ services:
       - Jwt__Audience=${AGRI_JWT_AUDIENCE:-AgriMarket}
       - Cors__Origins__0=${AGRI_CORS_ORIGIN:-http://localhost:8080}
       - Cors__Origins__1=${AGRI_CORS_ORIGIN:-http://localhost:3067}
+      - Cors__Origins__1=${AGRI_CORS_ORIGIN:-https://htiits-agrimarket-front.proxy.itcollege.ee}
     networks:
       - agrimarket-net
 
