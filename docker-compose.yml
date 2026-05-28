@@ -29,7 +29,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
-      - ConnectionStrings__DefaultConnection=Host=${AGRI_POSTGRES_HOST:-agrimarket-db};Port=${AGRI_POSTGRES_DB_PORT:-5432};Database=${AGRI_POSTGRES_DB:-agrimarket};Username=${AGRI_POSTGRES_USER:-postgres};Password=${AGRI_POSTGRES_PASSWORD:-postgres}
+      - ConnectionStrings__DefaultConnection=Host=${AGRI_POSTGRES_HOST:-agrimarket-db};Port=${AGRI_POSTGRES_DB_PORT:-5432};Database=${AGRI_POSTGRES_DB:-agrimarket_modular};Username=${AGRI_POSTGRES_USER:-postgres};Password=${AGRI_POSTGRES_PASSWORD:-postgres}
     networks:
       - agrimarket-net
 
