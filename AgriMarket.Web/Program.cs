@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +47,10 @@ builder.Services.AddApiVersioning(options =>
 builder.Services.AddControllersWithViews()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .ConfigureApplicationPartManager(manager =>
-        manager.FeatureProviders.Add(new InternalControllerFeatureProvider()));
+    {
+        manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+        manager.FeatureProviders.Add(new InternalViewComponentFeatureProvider());
+    });
 builder.Services.AddLocalization();
 builder.Services.AddScoped<IMessageNotifier, AgriMarket.Web.Services.NoOpMessageNotifier>();
 
@@ -148,5 +153,32 @@ internal sealed class InternalControllerFeatureProvider : ControllerFeatureProvi
 
         return typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
             || typeInfo.IsDefined(typeof(ControllerAttribute));
+    }
+}
+
+internal sealed class InternalViewComponentFeatureProvider : IApplicationFeatureProvider<ViewComponentFeature>
+{
+    public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentFeature feature)
+    {
+        foreach (var part in parts.OfType<IApplicationPartTypeProvider>())
+        {
+            foreach (var type in part.Types)
+            {
+                if (IsViewComponent(type) && !feature.ViewComponents.Contains(type))
+                    feature.ViewComponents.Add(type);
+            }
+        }
+    }
+
+    private static bool IsViewComponent(TypeInfo typeInfo)
+    {
+        if (!typeInfo.IsClass || typeInfo.IsAbstract || typeInfo.ContainsGenericParameters)
+            return false;
+
+        if (typeInfo.IsDefined(typeof(NonViewComponentAttribute)))
+            return false;
+
+        return typeInfo.Name.EndsWith("ViewComponent", StringComparison.OrdinalIgnoreCase)
+            || typeInfo.IsDefined(typeof(ViewComponentAttribute));
     }
 }
