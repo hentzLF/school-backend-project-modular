@@ -83,9 +83,10 @@ internal class MyListingsController(IListingService listingService, ICategorySer
             return View(model);
         }
 
-        if (!TryGetUserId(out var userId)) return NotFound();
+        var profile = await GetProviderProfileAsync();
+        if (profile == null) return NotFound();
 
-        var listing = await listingService.CreateAsync(userId, model.ToCreateListingDto());
+        var listing = await listingService.CreateAsync(profile.Id, model.ToCreateListingDto());
         return RedirectToAction(nameof(Details), new { id = listing.Id });
     }
 
@@ -127,11 +128,12 @@ internal class MyListingsController(IListingService listingService, ICategorySer
             return View(model);
         }
 
-        if (!TryGetUserId(out var userId)) return NotFound();
+        var profile = await GetProviderProfileAsync();
+        if (profile == null) return NotFound();
 
         try
         {
-            var listing = await listingService.UpdateAsync(userId, model.ToUpdateListingDto());
+            var listing = await listingService.UpdateAsync(profile.Id, model.ToUpdateListingDto());
             return RedirectToAction(nameof(Details), new { id = listing.Id });
         }
         catch (BusinessRuleException)
@@ -161,11 +163,12 @@ internal class MyListingsController(IListingService listingService, ICategorySer
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(Guid id)
     {
-        if (!TryGetUserId(out var userId)) return NotFound();
+        var profile = await GetProviderProfileAsync();
+        if (profile == null) return NotFound();
 
         try
         {
-            await listingService.DeleteAsync(userId, id);
+            await listingService.DeleteAsync(profile.Id, id);
             return RedirectToAction(nameof(Index));
         }
         catch (BusinessRuleException ex)
@@ -187,11 +190,12 @@ internal class MyListingsController(IListingService listingService, ICategorySer
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ToggleActive(Guid id)
     {
-        if (!TryGetUserId(out var userId)) return NotFound();
+        var profile = await GetProviderProfileAsync();
+        if (profile == null) return NotFound();
 
         try
         {
-            await listingService.ToggleActiveAsync(userId, id);
+            await listingService.ToggleActiveAsync(profile.Id, id);
         }
         catch (BusinessRuleException)
         {
@@ -236,11 +240,9 @@ internal class MyListingsController(IListingService listingService, ICategorySer
             return View("Availabilities", reload.ToAvailabilitiesVm());
         }
 
-        if (!TryGetUserId(out var userId)) return NotFound();
-
         try
         {
-            await listingService.AddAvailabilityAsync(userId, new CreateAvailabilityDto
+            await listingService.AddAvailabilityAsync(profile.Id, new CreateAvailabilityDto
             {
                 ListingId = listingId,
                 StartTime = model.AddStartTime,
@@ -262,11 +264,12 @@ internal class MyListingsController(IListingService listingService, ICategorySer
         var availability = await listingService.GetAvailabilityByIdAsync(id);
         if (availability == null) return NotFound();
 
-        if (!TryGetUserId(out var userId)) return NotFound();
+        var profile = await GetProviderProfileAsync();
+        if (profile == null) return NotFound();
 
         try
         {
-            await listingService.DeleteAvailabilityAsync(userId, id);
+            await listingService.DeleteAvailabilityAsync(profile.Id, id);
         }
         catch (BusinessRuleException ex)
         {
