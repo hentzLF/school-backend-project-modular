@@ -15,6 +15,7 @@ services:
       - Jwt__Issuer=${AGRI_JWT_ISSUER:-AgriMarket}
       - Jwt__Audience=${AGRI_JWT_AUDIENCE:-AgriMarket}
       - Cors__Origins__0=${AGRI_CORS_ORIGIN:-http://localhost:8080}
+      - Cors__Origins__1=${AGRI_CORS_ORIGIN:-http://localhost:3067}
     networks:
       - agrimarket-net
 
