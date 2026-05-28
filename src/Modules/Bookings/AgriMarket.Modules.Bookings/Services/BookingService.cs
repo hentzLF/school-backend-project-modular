@@ -19,7 +19,7 @@ namespace AgriMarket.Modules.Bookings.Services;
 /// </summary>
 internal sealed class BookingService(
     IBookingRepository bookingRepo,
-    IRepository<Payment> paymentRepo,
+    [FromKeyedServices("bookings")] IRepository<Payment> paymentRepo,
     [FromKeyedServices("bookings")] IUnitOfWork uow,
     ICatalogModule catalog,
     IUsersModule users,

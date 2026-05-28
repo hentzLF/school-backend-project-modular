@@ -2,6 +2,7 @@ using AgriMarket.Modules.Bookings.Entities;
 using AgriMarket.Modules.Users.Contracts;
 using AgriMarket.Shared.Persistence;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Bookings.EventHandlers;
 
@@ -11,8 +12,8 @@ namespace AgriMarket.Modules.Bookings.EventHandlers;
 /// client. Payments/reviews attached to those bookings cascade at the database.
 /// </summary>
 internal sealed class UserDeletedEventHandler(
-    IRepository<Review> reviews,
-    IRepository<Booking> bookings) : INotificationHandler<UserDeletedEvent>
+    [FromKeyedServices("bookings")] IRepository<Review> reviews,
+    [FromKeyedServices("bookings")] IRepository<Booking> bookings) : INotificationHandler<UserDeletedEvent>
 {
     public async Task Handle(UserDeletedEvent notification, CancellationToken cancellationToken)
     {

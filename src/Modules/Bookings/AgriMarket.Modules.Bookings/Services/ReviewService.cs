@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace AgriMarket.Modules.Bookings.Services;
 
 internal sealed class ReviewService(
-    IRepository<Review> reviews,
+    [FromKeyedServices("bookings")] IRepository<Review> reviews,
     IBookingRepository bookings,
     [FromKeyedServices("bookings")] IUnitOfWork uow,
     IQueryMaterializer mat,

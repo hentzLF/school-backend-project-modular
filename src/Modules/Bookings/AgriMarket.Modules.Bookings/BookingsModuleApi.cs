@@ -2,12 +2,13 @@ using AgriMarket.Modules.Bookings.Contracts;
 using AgriMarket.Modules.Bookings.Entities;
 using AgriMarket.Modules.Bookings.Enums;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Bookings;
 
 internal sealed class BookingsModuleApi(
-    IRepository<Booking> bookings,
-    IRepository<Review> reviews,
+    [FromKeyedServices("bookings")] IRepository<Booking> bookings,
+    [FromKeyedServices("bookings")] IRepository<Review> reviews,
     IQueryMaterializer materializer) : IBookingsModule
 {
     private static readonly BookingStatus[] ActiveStatuses =

@@ -3,12 +3,13 @@ using AgriMarket.Modules.Bookings.Entities;
 using AgriMarket.Modules.Bookings.Enums;
 using AgriMarket.Modules.Marketplace.Contracts;
 using AgriMarket.Shared.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AgriMarket.Modules.Bookings.Services;
 
 internal sealed class ProviderDashboardService(
-    IRepository<Booking> bookings,
-    IRepository<Payment> payments,
+    [FromKeyedServices("bookings")] IRepository<Booking> bookings,
+    [FromKeyedServices("bookings")] IRepository<Payment> payments,
     IQueryMaterializer mat,
     ICatalogModule catalog) : IProviderDashboardService
 {

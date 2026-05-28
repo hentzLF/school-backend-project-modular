@@ -13,7 +13,7 @@ namespace AgriMarket.Modules.Bookings.Services;
 
 internal sealed class ClientPaymentService(
     IBookingRepository bookingRepo,
-    IRepository<Payment> paymentRepo,
+    [FromKeyedServices("bookings")] IRepository<Payment> paymentRepo,
     [FromKeyedServices("bookings")] IUnitOfWork uow,
     IQueryMaterializer mat,
     ICatalogModule catalog,

@@ -8,6 +8,7 @@ using AgriMarket.Modules.Messaging.Contracts;
 using AgriMarket.Modules.Users;
 using AgriMarket.Resources;
 using AgriMarket.Shared.Modules;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,15 @@ var moduleAssemblies = modules.Select(m => m.GetType().Assembly).ToArray();
 
 // MediatR — integration events and their handlers span every module assembly
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(moduleAssemblies));
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+    options.ApiVersionReader = new UrlSegmentApiVersionReader();
+})
+.AddMvc();
 
 builder.Services.AddControllersWithViews()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)

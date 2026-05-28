@@ -26,7 +26,7 @@ public sealed class MarketplaceModule : IModule
                 npgsql.MigrationsHistoryTable("__EFMigrationsHistory", "marketplace")));
 
         services.AddKeyedScoped<IUnitOfWork, EfUnitOfWork>("marketplace");
-        services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+        services.AddKeyedScoped(typeof(IRepository<>), typeof(EfRepository<>), "marketplace");
         services.AddScoped<IQueryMaterializer, EfQueryMaterializer>();
         services.AddScoped<IListingRepository, EfListingRepository>();
         services.AddScoped<IAvailabilityRepository, EfAvailabilityRepository>();
